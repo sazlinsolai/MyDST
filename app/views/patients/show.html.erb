@@ -1,0 +1,110 @@
+<% @location = "main" %>
+
+
+<div class="row">
+  <div class="sixcol">
+    <h2>Maklumat Pesakit : <b><%= @patient.name if @patient.name? %></b> </h2>
+  </div>
+  <div class="last">
+    <div class='leftupperbutton' data-role="controlgroup" data-type="horizontal">
+        <a href="<%= new_patient_path %>" data-role="button" data-icon="plus" data-theme="c"><span style="color:green;">Pesakit Baru</span></a>
+        <a href="<%= edit_patient_path %>" data-role="button" data-icon="check" data-theme="c"><span style="color:green;">Edit Rekod</span></a>
+        <a href="<%= edit_patient_path %>" data-role="button" data-icon="delete" data-theme="c"><span style="color:red;">Hapus Rekod</span></a>
+        
+        
+        <%#= button_to "Hapus Rekod", patient_path(@patient) , :method => :delete, 'data-icon'=>"delete" %>
+    </div>
+  </div>
+</div>
+  
+<hr>
+
+
+<!--  using class row and sixcol will create double column inside the main panel which consist of 12 column-->
+<div class="row">
+  <div class="sixcol">
+    <table>
+      <tr>
+        <td align="right">Tarikh Pendaftaran Pesakit : </td>
+        <td><%= @patient.registration_date.strftime('%d/%m/%Y') if @patient.registration_date?%></td>
+      </tr>
+      <tr>
+        <td align="right">No Fail Pesakit :</td>
+        <td><%= @patient.file_no if @patient.file_no?%> </td>
+      </tr>
+      <tr>
+        <td align="right">No KP Baru :</td>
+        <td><%= @patient.ic_no if @patient.ic_no? %></td>
+      </tr>
+      <tr>
+        <td align="right">Tarikh Lahir : </td>
+        <td><%= @patient.birthdate.strftime('%d/%m/%Y') if @patient.birthdate? %></td>
+      </tr>
+      <tr>
+        <td align="right">Umur Pesakit : </td>
+        <td><%= @patient.age if @patient.age? %></td>
+      </tr>
+      <tr>
+        <td align="right">Kategori Pekerjaan : </td>
+        <td><%= @patient.work_category if @patient.work_category? %></td>
+      </tr>
+      <tr>
+        <td align="right">Pindah : </td>
+        <td><%= @patient.transfer if @patient.transfer? %></td>
+      </tr>
+      <tr>
+        <td align="right">No KP Lama/Tentera/Polis : </td>
+        <td><%= @patient.old_ic if @patient.old_ic? %></td>
+      </tr>
+      <tr>
+        <td align="right">Bangsa : </td>
+        <td><%= @patient.race if @patient.race? %></td>
+      </tr>
+      <tr>
+        <td align="right">Nama Pekerjaan : </td>
+        <td><%= @patient.occupation if @patient.occupation? %></td>
+      </tr>
+    </table>
+ 
+  </div>
+  <div class="last">
+    <p><%= image_tag @patient.avatar.url(:thumb) %></p>
+    <p>Status Pesakit : <%= @patient.status %> </p>
+    
+
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="sixcol">
+    <h2>Alamat Pesakit</h2>
+  </div>
+  
+</div>
+<div class="row">
+  <div class="sixcol">
+    <table>
+      <tr>
+        <td align="right">Alamat : </td>
+        <td><%= @patient.address if @patient.address? %></td>
+      </tr>
+      <tr>
+        <td align="right">Bandar : </td>
+        <td><%= patient_district(@patient.district_id) if @patient.district_id? %></td>
+      </tr>
+      <tr>
+        <td align="right">Poskod : </td>
+        <td><%= @patient.postcode if @patient.postcode?%></td>
+      </tr>
+      <tr>
+        <td align="right">Negeri : </td>
+        <td><%= patient_country(@patient.state_id) if @patient.state_id? %></td>
+      </tr>
+      
+    </table>
+   
+  </div>
+</div>
+<br>

@@ -1,0 +1,21 @@
+<% if user_signed_in? %>
+
+<div data-role="footer" data-position="fixed" data-id="ew-footer">
+  <div data-role="navbar">
+    <ul>
+      <li><a href="#main" class="ui-btn-active" data-transition="slideup">Maklumat Waris</a></li>
+      <li><a href="#demo" data-transition="slideup">Maklumat Penagihan</a></li>
+      <li><a href="#demo" data-transition="slideup">Rekod Pusat Serenti/Penjara</a></li>
+      <li><a href="#demo" data-transition="slideup">Kaedah Rujukan ke Program DST</a></li>
+      <li><a href="#demo" data-transition="slideup">Sejarah Perubatan</a></li>
+      
+    </ul>
+  </div><!-- /navbar -->
+  <h2 class="ui-splitview-hidden">Engineworks &copy CS8</h2>
+</div><!-- /footer -->
+<% else %>
+  <div data-role="footer">
+
+    <h2>MyDST &copy CS8</h2>
+  </div>
+<% end %>

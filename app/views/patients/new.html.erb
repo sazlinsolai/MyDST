@@ -1,0 +1,113 @@
+
+
+<% @location = "main" %>
+
+<hr></hr>
+  <h3>Maklumat Pesakit</h3>
+  <hr></hr>
+
+
+<%= form_for @patient, :html => {:multipart => true} do |f| %>
+
+<div data-role="fieldcontain">
+<div class="row">
+  <div class="sixcol">
+    <br />
+    <%#*<input type="date" data-role="datebox" name="somedate" />%>
+    <p>
+      <%= f.label :registration_date, "Tarikh Pendaftaran Pesakit" %><br />
+      <%= f.text_field :registration_date, 'data-role'=>"datebox" %>
+    </p>
+    <p>
+      <%= f.label :name, "Nama Pesakit" %><br />
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :file_no, "No Fail Pesakit" %><br />
+      <%= f.text_field :file_no %>
+    </p>
+    <p>
+      <%= f.label :ic_no, "No KP Baru" %><br />
+      <%= f.text_field :ic_no %>
+    </p>
+    <p>
+      <%= f.label :birthdate, "Date of Birth" %><br />
+      <%= f.date_select :birthdate,
+      :start_year => getBirthDateStart(),
+      :end_year => getBirthDateEnd() %>
+    </p>
+    
+   
+    
+
+  </div><br>
+  <div class="sixcol last">
+    <p>
+      <%= f.label :age, "Umur Pesakit" %><br />
+      <%= f.text_field :age %>
+    </p>
+    <p>
+       <%= f.label :status, "Status Pesakit" %><br />
+       <%= f.text_field :status %>
+    </p>
+    <p>
+      <%= f.label :transfer, "Pindah" %><br />
+      <%= f.text_field :transfer %>
+    </p>
+    <p>
+      <%= f.label :old_ic, "No KP Lama/Polis/Tentera" %><br />
+      <%= f.text_field :old_ic %>
+    </p>
+    <p>
+      <%= f.label :race, "Bangsa" %><br />
+      <%= f.text_field :race %>
+    </p>
+     <p>
+      <%= f.label :work_category, "Kategori Pekerjaan" %><br />
+      <%= f.text_field :work_category %>
+    </p>
+    <p>
+      <%= f.label :occupation, "Nama Pekerjaan" %><br />
+      <%= f.text_field :occupation %>
+    </p>
+   
+   
+  </div>
+  
+  </div>
+  <hr></hr>
+  <p>
+	<%= image_tag @patient.avatar_url(:small) if @patient.avatar? %>
+	<%= f.label :avatar, "Muatnaik Gambar Pesakit" %><br />
+	<%= f.file_field :avatar %>
+  </p>
+   <p>
+      <%= f.label :address, "Alamat" %><br />
+      <%= f.text_field :address %>
+    </p>
+    <p>
+      <%= f.label :postcode, "Poskod" %><br />
+      <%= f.text_field :postcode %>
+    </p>
+    <p>
+      <%= f.label :address, "Bandar" %><br />
+      <%= f.select("district_id", options_for_select(Patient::DAERAH.collect {|x| [x[1],x[0]]}), {:prompt => 'Pilih Daerah'} )  %>
+    </p>
+    <p>
+      <%= f.label :state, "Negeri" %><br />
+      <%= f.select("state_id", options_for_select(Patient::NEGERI.collect {|x| [x[1],x[0]]}), {:prompt => 'Pilih Negeri'} )  %>
+    </p>
+    
+    
+</div>
+
+
+
+  <br>
+  <%= f.submit 'Save' %>
+
+<% end %>
+
+  <br/>
+  <br/>
+  

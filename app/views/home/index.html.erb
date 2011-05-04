@@ -1,0 +1,243 @@
+
+
+
+  <%= render :partial => 'layouts/sidebar' %>
+
+
+    <div data-role="panel" data-id="main">
+
+      <!-- start page id="home" in right column -->
+      <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'MyDST', :html_id=>'home', :location => "main"} do %>
+      <% if user_signed_in? %>
+          <div class="row">
+            <div class="fivecol">
+
+        <!-- 3. Add the container -->
+		<div id="graph"></div>
+
+            </div>
+            <div class='fivecol last'>
+              <!-- 3. Add the container -->
+		<div id="pie"></div>
+            </div>
+          </div>
+          <div class='row'>
+            
+          </div>
+       <% end %>
+        <% end %>
+        <!-- end page id="home" in right column -->
+
+
+      <!-- start page id="aktiviti" in right column -->
+      <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'MyDST', :html_id=>'aktiviti', :location => "main"} do %>
+      
+
+        <% if user_signed_in? %>
+          <div class="row">
+            <div class="sixcol last">
+
+            </div>
+          </div>
+          <div class='row'>
+            <div class='sixcol'>
+            </div>
+            <div class='sixcol last'>
+            </div>
+          </div>
+      <% end %>
+       <% end %>
+      <!-- end page id="aktiviti" in right column -->
+
+        
+      <!-- start page id="ali" in right column -->
+      <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'MyDST', :html_id=>'ali', :location => "main"} do %>
+
+      <% if user_signed_in? %>
+          <div class="row">
+            <div class="sixcol last">
+              <img src="http://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/203237_100000406462275_4116477_n.jpg"/>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='sixcol'>
+              <table>
+                <tr>
+                  <td>Tarikh Pendaftaran</td>
+                  <td>: 10/9/2011</td>
+                </tr>
+                <tr>
+                  <td>No KP Baru</td>
+                  <td>: 801014-14-5626</td>
+                </tr>
+                <tr>
+                  <td>Tarikh Lahir</td>
+                  <td>: 10/9/2011</td>
+                </tr>
+                <tr>
+                  <td>Umur Pesakit</td>
+                  <td>: 31 tahun</td>
+                </tr>
+              </table>
+            </div>
+            <div class='sixcol last'>
+              <table>
+                <tr>
+                  <td>Status Pesakit</td>
+                  <td>: <span style="color:green;">aktif</span></td>
+                </tr>
+                <tr>
+                  <td>Status Pindah</td>
+                  <td>: Bebas</td>
+                </tr>
+                <tr>
+                  <td>Bangsa</td>
+                  <td>: Melayu</td>
+                </tr>
+                <tr>
+                  <td>Pekerjaan</td>
+                  <td>: Kerani</td>
+                </tr>
+              </table>
+            </div>
+          </div><!-- /row -->
+          <hr/>
+          <div class="row">
+            <div class="twelvecol last">
+              <div class="ui-bar ui-bar-b ui-corner-top">
+                Waris
+
+              </div>
+              <table class="ui-table">
+                <thead class="ui-bar-b">
+                  <tr>
+                    <th>Nama</th>
+                    <th>Hubungan</th>
+                    <th>Alamat</th>
+                    <th>Bandar</th>
+                    <th>Poskod</th>
+                    <th>Negeri</th>
+                  </tr>
+                <thead>
+                <tbody>
+                  <tr>
+                    <td>Salamah Binti Abu</td>
+                    <td>Kakak</td>
+                    <td>No. 5 Jalan Ampang</td>
+                    <td>Ampang</td>
+                    <td>98956</td>
+                    <td>Selangor</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <!-- end page id="ali" in right column -->
+       
+
+
+    </div><!-- panel main -->
+
+<%= content_for :jscript do %>
+    <script type="text/javascript" charset="utf-8">
+
+  var options = {
+	chart: {
+		renderTo: 'graph',
+		defaultSeriesType: 'column',
+                reflow: true,
+		shadow: true
+		},
+        credits: {
+                enabled: false
+                },
+	title: {
+		text: 'Bekalan Methadone'
+		},
+        exporting: {
+        enabled: true
+    },
+    navigation: {
+        buttonOptions: {
+            enabled: true
+        }
+    },
+	series: []
+
+};
+
+var items = [{y:5},{y: 30},{y: 6},{y: 70}];
+
+for(var j=0; j < items.length; j++){
+  if(items[j].y < 10) {
+    items[j].color = '#BF0B23'
+  }
+}
+
+//var datas = [20,20,{y: 50, color: red},{y:40, color:white}];
+var series = [];
+
+options.series.push({data: items})
+
+//////////////////////
+
+
+  var pie_chart_options = {
+                                      chart: {
+						renderTo: 'pie',
+						plotBackgroundColor: null,
+						plotBorderWidth: null,
+						plotShadow: false
+					},
+                                        credits: {
+                                                enabled: false
+                                            },
+					title: {
+						text: 'Bekalan Methadone'
+					},
+					tooltip: {
+						formatter: function() {
+							return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+						}
+					},
+					plotOptions: {
+						pie: {
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: {
+								enabled: false
+							},
+                                                        showInLegend: true
+						}
+					},
+				    series: [{
+						type: 'pie',
+						name: 'Browser share',
+						data: [
+							['Firefox',   45.0],
+							['IE',       26.8],
+							{
+								name: 'Chrome',
+								y: 12.8,
+								sliced: true,
+								selected: true
+							},
+							['Safari',    8.5],
+							['Opera',     6.2],
+							['Others',   0.7]
+						]
+					}]
+  }
+
+
+
+    $(document).ready(function() {
+   var chart = new Highcharts.Chart(options);
+
+   var pie = new Highcharts.Chart(pie_chart_options);
+					
+ });
+</script>
+    <% end %>

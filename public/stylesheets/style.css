@@ -1,0 +1,14 @@
+.ui-table {
+  border-collapse: collapse;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  width:100%;
+}
+
+.ui-table td, .ui-table th{
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+}
+
+
+

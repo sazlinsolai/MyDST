@@ -1,0 +1,49 @@
+<div data-role="panel" data-id="menu" data-hash="crumbs" data-context="a.default">
+
+  <!-- start page id="main" -->
+  <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'Menu', :html_id=>'main', :location => "menu"} do %>
+  <% if user_signed_in? %>
+    <ul data-role="listview" data-theme="g">
+      <li><%= link_to 'Pesakit', patients_path %> </li>
+      <li><a href="#">Kaunseling</a></li>
+      <li><a href="#">Preskripsi</a></li>
+      <li><a href="#">Dispensan</a></li>
+      <li>Penyelaras Sistem
+        <ul>
+          <li><a href="#negeri" class="default">Negeri</a></li>
+          <li><a href="#">Daerah</a></li>
+          <li><a href="#">Kategori Fasiliti</a></li>
+          <li><a href="#">Bangsa</a></li>
+          <li><a href="#">Kategori Pekerjaan</a></li>
+          <li><a href="#">Sebab Menagih</a></li>
+          <li><a href="#">Jenis Dadah</a></li>
+          <li><a href="#">Keputusan Ujian</a></li>
+          <li><a href="#">Kod Pembekal</a></li>
+          <li><a href="#">Kod Kaunselor</a></li>
+          <li><a href="#">Jenis Kaunseling</a></li>
+          <li><a href="#">Tajuk Kaunseling</a></li>
+          <li><a href="#">Pengguna</a></li>
+          <li><a href="#">Peranan Pengguna</a></li>
+        </ul>
+      </li>
+    </ul>
+    <% end %>
+  <% end %> <!-- end page id="main" -->
+
+  <!-- start page id="demo" -->
+  <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'Aktiviti', :html_id=>'demo', :location => "menu"} do %>
+    <% if user_signed_in? %>
+    <ul data-role="listview" data-theme="g">
+      <li><a href="#aktiviti" data-panel="main" class="default">Semua</a></li>
+      <li><a href="#" data-panel="main">Dispensi</a></li>
+      <li><a href="#" data-panel="main">Kaunseling</a></li>
+    </ul>
+
+    <% end %>
+  <%end%>
+  <!-- end page id="demo" -->
+
+ 
+
+
+</div> <!-- end data-role="panel" -->

@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+
+<div data-role="footer" data-position="fixed" data-id="ew-footer">
+  <div data-role="navbar">
+    <ul>
+      <li><a href="#main" class="ui-btn-active" data-transition="slideup">Menu</a></li>
+      <li><a href="#demo" data-transition="slideup">Aktiviti</a></li>
+    </ul>
+  </div><!-- /navbar -->
+  <h2 class="ui-splitview-hidden">Engineworks &copy CS8</h2>
+</div><!-- /footer -->
+<% else %>
+  <div data-role="footer">
+
+    <h2>MyDST &copy CS8</h2>
+  </div>
+<% end %>

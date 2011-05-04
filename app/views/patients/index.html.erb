@@ -1,0 +1,34 @@
+ <!-- start page id="pesakit" -->
+
+  <% @location = "menu" %>
+
+ 
+  <%#= render :layout=>'layouts/page_layout', :locals=>{:title=>'Pesakit', :html_id=>'pesakit', :header=>'no'} do %>
+    <% if user_signed_in? %>
+
+
+
+
+  <ul data-role="listview" data-theme="g">
+      <li><a href="<%= new_patient_path %>" data-panel="main">New Patient</a></li>
+      </ul>
+
+      </br>
+      </br>
+
+
+      <ul data-role="listview" data-filter="true" data-theme="g">
+
+        <% @patients.group_by{|x| x.name.humanize[0]}.sort.each do |key,value| %>
+            <li data-role="list-divider"><%= key %> </li>
+            <% value.each do |i| %>
+            <li><%= link_to "#{i.name}", patient_path("#{i.id}"), 'data-panel'=>"main"%> </li>
+            <%end%>
+        <% end %>
+      </ul>
+
+
+
+    <% end %>
+  <%# end %>
+  <!-- end page id="pesakit" -->
