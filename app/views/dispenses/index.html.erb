@@ -1,0 +1,23 @@
+
+
+<% @location = "menu" %>
+<% @page_title = "Dispensan" %>
+
+
+
+    <% if user_signed_in? %>
+
+      <ul data-role="listview" data-filter="true" data-theme="g">
+        
+        <% @patients.group_by{|x| x.name.humanize[0]}.sort.each do |key,value| %>
+            <li data-role="list-divider"><%= key %> </li>
+            <% value.each do |i| %>
+            <li><%= link_to "#{i.name}", dispense_path("#{i.id}"), 'data-panel'=>"main"%> </li>
+            <%end%>
+        <% end %>
+      
+      </ul>
+
+
+
+    <% end %>

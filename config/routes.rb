@@ -1,6 +1,7 @@
 MyDST::Application.routes.draw do
 
   resources :patients
+  resources :dispenses
 
   devise_for :users
 

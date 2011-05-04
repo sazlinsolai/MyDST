@@ -7,13 +7,13 @@
   <hr></hr>
 
 
-<%= form_for @patient, :html => {:multipart => true} do |f| %>
+<%= form_for @patient, :html => {:multipart => true,'data-ajax' => "false"} do |f| %>
 
-<div data-role="fieldcontain">
+
 <div class="row">
-  <div class="sixcol">
+  <div class="span6">
     <br />
-    <%#*<input type="date" data-role="datebox" name="somedate" />%>
+    
     <p>
       <%= f.label :registration_date, "Tarikh Pendaftaran Pesakit" %><br />
       <%= f.text_field :registration_date, 'data-role'=>"datebox" %>
@@ -41,7 +41,7 @@
     
 
   </div><br>
-  <div class="sixcol last">
+  <div class="span6 last">
     <p>
       <%= f.label :age, "Umur Pesakit" %><br />
       <%= f.text_field :age %>
@@ -80,6 +80,7 @@
 	<%= image_tag @patient.avatar_url(:small) if @patient.avatar? %>
 	<%= f.label :avatar, "Muatnaik Gambar Pesakit" %><br />
 	<%= f.file_field :avatar %>
+        
   </p>
    <p>
       <%= f.label :address, "Alamat" %><br />
@@ -93,13 +94,16 @@
       <%= f.label :address, "Bandar" %><br />
       <%= f.select("district_id", options_for_select(Patient::DAERAH.collect {|x| [x[1],x[0]]}), {:prompt => 'Pilih Daerah'} )  %>
     </p>
-    <p>
-      <%= f.label :state, "Negeri" %><br />
+    <div data-role="fieldcontain">
+      
+      <%= f.label :state_id, "Negeri" %><br />
       <%= f.select("state_id", options_for_select(Patient::NEGERI.collect {|x| [x[1],x[0]]}), {:prompt => 'Pilih Negeri'} )  %>
-    </p>
+    
+    </div>
+
     
     
-</div>
+
 
 
 

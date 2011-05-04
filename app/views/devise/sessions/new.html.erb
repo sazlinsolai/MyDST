@@ -1,17 +1,27 @@
-<h2>Sign in</h2>
+<div class="row">
+<div class="span3"></div>
+<div class="span6">
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html=>{'data-ajax' => "false"}) do |f| %>
+	  <div data-role="fieldcontain">
+		  <%= f.label :email %>
+		  <%= f.email_field :email %>
+	  </div>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <p><%= f.label :email %><br />
-  <%= f.email_field :email %></p>
+	  <div data-role="fieldcontain">
+		  <%= f.label :password %>
+		  <%= f.password_field :password %>
+	  </div>
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
+	  <div data-role="fieldcontain">
+		  <% if devise_mapping.rememberable? -%>
+		    <input id="user_remember_me" type='hidden' name="user[remember_me]" type="checkbox" value="1">
+		  <% end -%>
+	  </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
-  <% end -%>
+	  <div data-role="fieldcontain"><%= f.submit "Sign in", 'data-inline' => 'true' %></div>
+	<% end %>
 
-  <p><%= f.submit "Sign in" %></p>
-<% end %>
-
-<%= render :partial => "devise/shared/links" %>
+	<%= render :partial => "devise/shared/links" %>
+</div>
+<div class="span3 last"></div>
+</div>

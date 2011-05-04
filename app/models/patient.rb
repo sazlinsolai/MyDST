@@ -7,6 +7,7 @@ class Patient < ActiveRecord::Base
   has_many :detentions
   has_many :medicinal_histories
   has_many :relatives
+  has_many :prescriptions
 
   DAERAH = {0 => "Kuala Terengganu", 1 => "Kuala Langat"}
   NEGERI = {0 => "Johor",1 => "Kedah",2=>"Kelantan",3=>"Melaka",

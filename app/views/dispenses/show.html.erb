@@ -5,18 +5,9 @@
   <div class="span6">
     <h2>Maklumat Pesakit : <b><%= @patient.name if @patient.name? %></b> </h2>
   </div>
-  <div class="last">
-    <div class='leftupperbutton' data-role="controlgroup" data-type="horizontal">
-        <a href="<%= new_patient_path %>" data-role="button" data-icon="plus" data-theme="c"><span style="color:green;">Pesakit Baru</span></a>
-        <a href="<%= edit_patient_path %>" data-role="button" data-icon="check" data-theme="c"><span style="color:green;">Edit Rekod</span></a>
-        <a href="<%= edit_patient_path %>" data-role="button" data-icon="delete" data-theme="c"><span style="color:red;">Hapus Rekod</span></a>
-        
-        
-        <%#= button_to "Hapus Rekod", patient_path(@patient) , :method => :delete, 'data-icon'=>"delete" %>
-    </div>
-  </div>
+ 
 </div>
-  
+
 <hr>
 
 
@@ -65,12 +56,12 @@
         <td><%= @patient.occupation if @patient.occupation? %></td>
       </tr>
     </table>
- 
+
   </div>
   <div class="last">
     <p><%= image_tag @patient.avatar.url(:thumb) %></p>
     <p>Status Pesakit : <%= @patient.status %> </p>
-    
+
 
   </div>
 </div>
@@ -79,32 +70,39 @@
 
 <div class="row">
   <div class="span6">
-    <h2>Alamat Pesakit</h2>
+    <h2>Rekod Preskipsi</h2>
   </div>
-  
+
 </div>
+
 <div class="row">
   <div class="span6">
-    <table>
-      <tr>
-        <td align="right">Alamat : </td>
-        <td><%= @patient.address if @patient.address? %></td>
-      </tr>
-      <tr>
-        <td align="right">Bandar : </td>
-        <td><%= patient_district(@patient.district_id) if @patient.district_id? %></td>
-      </tr>
-      <tr>
-        <td align="right">Poskod : </td>
-        <td><%= @patient.postcode if @patient.postcode?%></td>
-      </tr>
-      <tr>
-        <td align="right">Negeri : </td>
-        <td><%= patient_country(@patient.state_id) if @patient.state_id? %></td>
-      </tr>
-      
-    </table>
-   
+    <table class="ui-table">
+                <thead class="ui-bar-b">
+                  <tr>
+                    <th>Tarikh</th>
+                    <th>Nama Ubat</th>
+                    <th>Dos Ubat</th>
+                    <th>Tempoh</th>
+                    <th>Nama Dr.</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                <thead>
+                <tbody>
+                  <tr>
+                    <td>10/1/2011</td>
+                    <td>Ubat Batuk</td>
+                    <td>5 mg</td>
+                    <td>1 Minggu</td>
+                    <td>Asyraf Rahman</td>
+                    <td>Selesai</td>
+                    <td>[]</td>
+                  </tr>
+                </tbody>
+              </table>
   </div>
 </div>
+
+
 <br>
