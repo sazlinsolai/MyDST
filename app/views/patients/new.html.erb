@@ -14,86 +14,86 @@
   <div class="span6">
     <br />
     
-    <p>
+    <div data-role="fieldcontain">
       <%= f.label :registration_date, "Tarikh Pendaftaran Pesakit" %><br />
       <%= f.text_field :registration_date, 'data-role'=>"datebox", 'data-options'=>'{"buttonTheme": "b", "dateFormat": "dd-mm-YYYY"}' %>
-    </p>
-    <p>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :name, "Nama Pesakit" %><br />
       <%= f.text_field :name %>
-    </p>
-    <p>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :file_no, "No Fail Pesakit" %><br />
       <%= f.text_field :file_no %>
-    </p>
-    <p>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :ic_no, "No KP Baru" %><br />
       <%= f.text_field :ic_no %>
-    </p>
-    <p>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :birthdate, "Date of Birth" %><br />
       <%= f.date_select :birthdate,
       :start_year => getBirthDateStart(),
       :end_year => getBirthDateEnd() %>
-    </p>
+    </div>
     
    
     
 
   </div><br>
   <div class="span6 last">
-    <p>
+    <div data-role="fieldcontain">
       <%= f.label :age, "Umur Pesakit" %><br />
       <%= f.text_field :age %>
-    </p>
-    <p>
+    </div>
+    <div data-role="fieldcontain">
        <%= f.label :status, "Status Pesakit" %><br />
        <%= f.text_field :status %>
-    </p>
-    <p>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :transfer, "Pindah" %><br />
       <%= f.text_field :transfer %>
-    </p>
-    <p>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :old_ic, "No KP Lama/Polis/Tentera" %><br />
       <%= f.text_field :old_ic %>
-    </p>
-    <p>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :race, "Bangsa" %><br />
       <%= f.text_field :race %>
-    </p>
-     <p>
+    </div>
+     <div data-role="fieldcontain">
       <%= f.label :work_category, "Kategori Pekerjaan" %><br />
       <%= f.text_field :work_category %>
-    </p>
-    <p>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :occupation, "Nama Pekerjaan" %><br />
       <%= f.text_field :occupation %>
-    </p>
+    </div>
    
    
   </div>
   
   </div>
   <hr></hr>
-  <p>
+  <div data-role="fieldcontain">
 	<%= image_tag @patient.avatar_url(:small) if @patient.avatar? %>
 	<%= f.label :avatar, "Muatnaik Gambar Pesakit" %><br />
 	<%= f.file_field :avatar %>
         
-  </p>
-   <p>
+  </div>
+   <div data-role="fieldcontain">
       <%= f.label :address, "Alamat" %><br />
       <%= f.text_field :address %>
-    </p>
-    <p>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :postcode, "Poskod" %><br />
       <%= f.text_field :postcode %>
-    </p>
-    <p>
-      <%= f.label :address, "Bandar" %><br />
+    </div>
+    <div data-role="fieldcontain">
+      <%= f.label :district_id, "Bandar" %><br />
       <%= f.select("district_id", options_for_select(Patient::DAERAH.collect {|x| [x[1],x[0]]}), {:prompt => 'Pilih Daerah'} )  %>
-    </p>
+    </div>
     <div data-role="fieldcontain">
       
       <%= f.label :state_id, "Negeri" %><br />

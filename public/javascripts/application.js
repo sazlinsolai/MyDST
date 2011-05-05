@@ -2,4 +2,5 @@
 // This file is automatically included by javascript_include_tag :defaults
 $( window.document ).bind( "mobileinit", function(){
     $.mobile.page.prototype.options.degradeInputs.date = 'text';
+    $.mobile.selectmenu.prototype.options.nativeMenu = false;
 });
