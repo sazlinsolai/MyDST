@@ -7,7 +7,7 @@
   <hr></hr>
 
 
-<%= form_for @patient, :html => {:multipart => true,'data-ajax' => "false"} do |f| %>
+<%= form_for @patient, :html => {:multipart => true} do |f| %>
 
 
 <div class="row">
@@ -16,7 +16,7 @@
     
     <p>
       <%= f.label :registration_date, "Tarikh Pendaftaran Pesakit" %><br />
-      <%= f.text_field :registration_date, 'data-role'=>"datebox" %>
+      <%= f.text_field :registration_date, 'data-role'=>"datebox", 'data-options'=>'{"buttonTheme": "b", "dateFormat": "dd-mm-YYYY"}' %>
     </p>
     <p>
       <%= f.label :name, "Nama Pesakit" %><br />

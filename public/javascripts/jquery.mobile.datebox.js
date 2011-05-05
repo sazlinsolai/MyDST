@@ -37,7 +37,7 @@
 		useModal: false,
 		noButtonFocusMode: false,
 
-		fieldsOrder: ['m', 'd', 'y'],
+		fieldsOrder: ['d', 'm', 'y'],
 		headerFormat: 'ddd, mmm dd, YYYY',
 		dateFormat: 'YYYY-MM-DD',
 		minuteStep: 1,
