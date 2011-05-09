@@ -6,4 +6,5 @@ class HomeController < ApplicationController
     #@patients = Patient.all
   end
 
+  
 end

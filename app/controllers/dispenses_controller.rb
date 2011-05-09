@@ -8,5 +8,8 @@ class DispensesController < ApplicationController
     @patient = Patient.find(params[:id])
   end
 
+  def work_in_progress
+    
+  end
 
 end

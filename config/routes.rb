@@ -1,7 +1,11 @@
 MyDST::Application.routes.draw do
 
   resources :patients
-  resources :dispenses
+  resources :dispenses do
+    collection do
+      get 'work_in_progress'
+    end
+  end
 
   devise_for :users
 

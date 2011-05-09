@@ -23,45 +23,45 @@
 <!--  using class row and sixcol will create double column inside the main panel which consist of 12 column-->
 <div class="row">
   <div class="span6">
-    <table>
+    <table width="400">
       <tr>
-        <td align="right">Tarikh Pendaftaran Pesakit : </td>
+        <td width="50%" align="right">Tarikh Pendaftaran Pesakit : </td>
         <td><%= @patient.registration_date.strftime('%d/%m/%Y') if @patient.registration_date?%></td>
       </tr>
       <tr>
-        <td align="right">No Fail Pesakit :</td>
+        <td width="50%" align="right">No Fail Pesakit :</td>
         <td><%= @patient.file_no if @patient.file_no?%> </td>
       </tr>
       <tr>
-        <td align="right">No KP Baru :</td>
+        <td width="50%" align="right">No KP Baru :</td>
         <td><%= @patient.ic_no if @patient.ic_no? %></td>
       </tr>
       <tr>
-        <td align="right">Tarikh Lahir : </td>
+        <td width="50%" align="right">Tarikh Lahir : </td>
         <td><%= @patient.birthdate.strftime('%d/%m/%Y') if @patient.birthdate? %></td>
       </tr>
       <tr>
-        <td align="right">Umur Pesakit : </td>
+        <td width="50%" align="right">Umur Pesakit : </td>
         <td><%= @patient.age if @patient.age? %></td>
       </tr>
       <tr>
-        <td align="right">Kategori Pekerjaan : </td>
+        <td width="50%" align="right">Kategori Pekerjaan : </td>
         <td><%= @patient.work_category if @patient.work_category? %></td>
       </tr>
       <tr>
-        <td align="right">Pindah : </td>
+        <td width="50%" align="right">Pindah : </td>
         <td><%= @patient.transfer if @patient.transfer? %></td>
       </tr>
       <tr>
-        <td align="right">No KP Lama/Tentera/Polis : </td>
+        <td width="50%" align="right">No KP Lama/Tentera/Polis : </td>
         <td><%= @patient.old_ic if @patient.old_ic? %></td>
       </tr>
       <tr>
-        <td align="right">Bangsa : </td>
+        <td width="50%" align="right">Bangsa : </td>
         <td><%= @patient.race if @patient.race? %></td>
       </tr>
       <tr>
-        <td align="right">Nama Pekerjaan : </td>
+        <td width="50%" align="right">Nama Pekerjaan : </td>
         <td><%= @patient.occupation if @patient.occupation? %></td>
       </tr>
     </table>
@@ -85,21 +85,21 @@
 </div>
 <div class="row">
   <div class="span6">
-    <table>
+    <table width="400">
       <tr>
-        <td align="right">Alamat : </td>
+        <td width="50%" align="right">Alamat : </td>
         <td><%= @patient.address if @patient.address? %></td>
       </tr>
       <tr>
-        <td align="right">Bandar : </td>
+        <td width="50%" align="right">Bandar : </td>
         <td><%= @patient.daerah if @patient.daerah? %></td>
       </tr>
       <tr>
-        <td align="right">Poskod : </td>
+        <td width="50%" align="right">Poskod : </td>
         <td><%= @patient.postcode if @patient.postcode?%></td>
       </tr>
       <tr>
-        <td align="right">Negeri : </td>
+        <td width="50%" align="right">Negeri : </td>
         <td><%= patient_country(@patient.state_id) if @patient.state_id? %></td>
       </tr>
       

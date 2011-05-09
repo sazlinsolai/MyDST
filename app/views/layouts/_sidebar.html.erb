@@ -5,8 +5,8 @@
   <% if user_signed_in? %>
     <ul data-role="listview" data-theme="g">
       <li><%= link_to 'Pesakit', patients_path %> </li>
-      <li><a href="#">Kaunseling</a></li>
-      <li><a href="#">Preskripsi</a></li>
+      <li><%= link_to 'Kaunseling', work_in_progress_dispenses_path, 'data-panel'=>"main" %> </li>
+      <li><%= link_to 'Preskripsi', work_in_progress_dispenses_path, 'data-panel'=>"main" %> </li>
       <li><%= link_to 'Dispensan', dispenses_path %>
         
       </li>
