@@ -10,23 +10,23 @@
       <li><%= link_to 'Dispensan', dispenses_path %>
         
       </li>
-      <li>Penyelaras Sistem
-        <ul>
-          <li><a href="#negeri" class="default">Negeri</a></li>
-          <li><a href="#">Daerah</a></li>
-          <li><a href="#">Kategori Fasiliti</a></li>
-          <li><a href="#">Bangsa</a></li>
-          <li><a href="#">Kategori Pekerjaan</a></li>
-          <li><a href="#">Sebab Menagih</a></li>
-          <li><a href="#">Jenis Dadah</a></li>
-          <li><a href="#">Keputusan Ujian</a></li>
-          <li><a href="#">Kod Pembekal</a></li>
-          <li><a href="#">Kod Kaunselor</a></li>
-          <li><a href="#">Jenis Kaunseling</a></li>
-          <li><a href="#">Tajuk Kaunseling</a></li>
-          <li><a href="#">Pengguna</a></li>
-          <li><a href="#">Peranan Pengguna</a></li>
-        </ul>
+      <li><%= link_to 'Penyelaras Sistem', work_in_progress_dispenses_path, 'data-panel'=>"main" %>
+        <%#*<ul>%>
+          <%#*<li><a href="#negeri" class="default">Negeri</a></li>%>
+          <%#*<li><a href="#">Daerah</a></li>%>
+          <%#*<li><a href="#">Kategori Fasiliti</a></li>%>
+          <%#*<li><a href="#">Bangsa</a></li>%>
+          <%#*<li><a href="#">Kategori Pekerjaan</a></li>%>
+          <%#*<li><a href="#">Sebab Menagih</a></li>%>
+          <%#*<li><a href="#">Jenis Dadah</a></li>%>
+          <%#*<li><a href="#">Keputusan Ujian</a></li>%>
+          <%#*<li><a href="#">Kod Pembekal</a></li>%>
+          <%#*<li><a href="#">Kod Kaunselor</a></li>%>
+          <%#*<li><a href="#">Jenis Kaunseling</a></li>%>
+          <%#*<li><a href="#">Tajuk Kaunseling</a></li>%>
+          <%#*<li><a href="#">Pengguna</a></li>%>
+          <%#*<li><a href="#">Peranan Pengguna</a></li>%>
+        <%#*</ul>%>
       </li>
     </ul>
     <% end %>
@@ -36,9 +36,9 @@
   <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'Aktiviti', :html_id=>'demo', :location => "menu"} do %>
     <% if user_signed_in? %>
     <ul data-role="listview" data-theme="g">
-      <li><a href="#aktiviti" data-panel="main" class="default">Semua</a></li>
-      <li><a href="#" data-panel="main">Dispensi</a></li>
-      <li><a href="#" data-panel="main">Kaunseling</a></li>
+      <li><%= link_to 'Semua', work_in_progress_dispenses_path, 'data-panel'=>"main" %></li>
+      <li><%= link_to 'Dispensi', work_in_progress_dispenses_path, 'data-panel'=>"main" %></li>
+      <li><%= link_to 'Kaunseling', work_in_progress_dispenses_path, 'data-panel'=>"main" %></li>
     </ul>
 
     <% end %>
