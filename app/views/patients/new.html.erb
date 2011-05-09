@@ -92,7 +92,7 @@
     </div>
     <div data-role="fieldcontain">
       <%= f.label :district_id, "Bandar" %><br />
-      <%= f.select("district_id", options_for_select(Patient::DAERAH.collect {|x| [x[1],x[0]]}), {:prompt => 'Pilih Daerah'} )  %>
+      <%= f.text_field :daerah  %>
     </div>
     <div data-role="fieldcontain">
       

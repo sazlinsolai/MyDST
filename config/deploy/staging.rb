@@ -26,7 +26,7 @@ set :rails_env, "production"
 #############################################################
 
 set :user, "cs8"
-set :domain, "192.168.0.14"
+set :domain, "209.20.83.137"
 ssh_options[:port] = 30
 server domain, :app, :web
 role :db, domain, :primary => true
@@ -58,7 +58,7 @@ namespace :deploy do
       adapter: mysql
       encoding: utf8
       username: root
-      password: 1
+      password: biz@2010
       database: mydst_production
       pool: 10
       socket: /var/run/mysqld/mysqld.sock
