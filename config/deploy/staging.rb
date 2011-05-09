@@ -146,5 +146,5 @@ namespace :bundler do
   end
 end
 
-after "deploy", "deploy:symlink", "deploy:cleanup", "bundler:bundle_new_release"
+after "deploy", "deploy:symlink", "deploy:cleanup"
 
