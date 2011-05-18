@@ -17,5 +17,10 @@ class Patient < ActiveRecord::Base
 
 
   mount_uploader :avatar, AvatarUploader
-  
+
+  # constructing the JSON structure for patient model
+  def as_json(options={})
+    {:id => id, :name => name}
+  end
+
 end

@@ -4,7 +4,7 @@
   <%= render :partial => 'layouts/sidebar' %>
 
 
-    <div data-role="panel" data-id="main">
+    <div data-role="panel" data-id="main" data-context="a.default">
 
       <!-- start page id="home" in right column -->
       <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'MyDST', :html_id=>'home', :location => "main"} do %>

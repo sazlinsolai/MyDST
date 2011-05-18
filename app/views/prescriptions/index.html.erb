@@ -1,0 +1,18 @@
+<% @location = "menu" %>
+
+
+  <%#= render :layout=>'layouts/page_layout', :locals=>{:title=>'Pesakit', :html_id=>'pesakit', :header=>'no'} do %>
+    <% if user_signed_in? %>
+
+      <ul id="prescription_list" data-role="listview" data-filter="true" data-theme="g">
+        <% @patients.group_by{|x| x.name.humanize[0]}.sort.each do |key,value| %>
+            <li data-role="list-divider"><%= key %> </li>
+            <% value.each do |i| %>
+            <li><%= link_to "#{i.name}", prescription_path("#{i.id}"), 'data-panel'=>"main"%> </li>
+            <%end%>
+        <% end %>
+      </ul>
+
+
+
+    <% end %>

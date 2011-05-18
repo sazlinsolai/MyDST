@@ -1,0 +1,61 @@
+<div data-role="page" data-url="/prescriptions/<%= @patient.id %>" data-context="a.refresh">
+  <% @location ="main" %>
+
+  <%= render :partial => 'layouts/page_header', :locals => {:title => "#{@patient.name}", :location => "main" } %>
+
+  <div data-role="content">
+    <% if @redirect %>
+       <a href="/prescriptions" data-panel="menu" class="refresh" style="display: none"></a>
+    <% end %>
+
+    <%= render :partial => "patients/patient_detail" %>
+
+  <hr></hr>
+  <%= link_to 'New Prescription', new_prescription_path(:patient_id => @patient.id), 'data-role'=>"button"%>
+  <div class="row">
+    <div class="span10">
+      <% if @prescriptions.empty? %>
+        <p>No prescriptions available </p>
+        <p> </p>
+      <% else %>
+        <table border="1">
+          <tr>
+            <th>Tarikh Preskripsi</th>
+            <th>Dos Ubat</th>
+            <th>Tempoh</th>
+            <th>Nama Doktor</th>
+            <th>Catatan</th>
+            <th>Status</th>
+            <th>Tindakan</th>
+          </tr>
+          <% @prescriptions.each do |pres| %>
+            <tr>
+              <td><%= pres.date_of_prescription%> </td>
+              <td><%= pres.medicine_dose %> </td>
+              <td><%= pres.period %> </td>
+              <td><%= pres.name_of_doctor %> </td>
+              <td><%= pres.remarks %> </td>
+              <td>link to dispense here</td>
+              <td></td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+      <br/>
+
+
+    </div>
+
+  </div>
+
+  </div>
+
+  
+
+
+  <%=  render :partial=>'layouts/main_footer' %>
+</div>
+
+
+
+

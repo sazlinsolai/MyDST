@@ -6,6 +6,7 @@ MyDST::Application.routes.draw do
       get 'work_in_progress'
     end
   end
+  resources :prescriptions
 
   devise_for :users
 

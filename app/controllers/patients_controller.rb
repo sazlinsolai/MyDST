@@ -1,7 +1,11 @@
 class PatientsController < ApplicationController
+  
+  respond_to :html, :json
+
 
   def index
-    @patients = Patient.all
+    @patients = Patient.find(:all,:order => "created_at DESC")
+    #respond_with(@patients)
   end
 
   def new
@@ -11,10 +15,9 @@ class PatientsController < ApplicationController
   def create
     @patient = Patient.new(params[:patient])
 
-    respond_to do |format|
+    respond_with(@patient) do |format|
       if @patient.save
-        format.html { redirect_to(patient_path(@patient), :notice => '') }
-        
+        format.html { redirect_to(patient_path(@patient, :redirect => true), :notice => 'yes') }
       else
         format.html { render :action => "new" }
         
@@ -24,10 +27,13 @@ class PatientsController < ApplicationController
 
   def show
     @patient = Patient.find(params[:id])
+    @redirect = params[:redirect] == "true"? true : false
+    render :layout => 'bare'
   end
 
   def edit
     @patient = Patient.find(params[:id])
+    
   end
 
   def update

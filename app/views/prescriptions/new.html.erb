@@ -1,0 +1,47 @@
+<% @location = "main" %>
+
+<%= render :partial => 'patients/patient_detail' %>
+
+<hr></hr>
+
+<%= form_for @prescription do |f| %>
+
+<div class="row">
+  <div class="span6">
+    <br/>
+    <div data-role="fieldcontain">
+      <%= f.label :date_of_prescription, "Tarikh Preskripsi" %><br />
+      <%= f.text_field :date_of_prescription, 'data-role'=>"datebox", 'data-options'=>'{"buttonTheme": "b", "dateFormat": "dd-mm-YYYY"}' %>
+    </div>
+    <div data-role="fieldcontain">
+      <%= f.label :medicine_dose, "Dos Ubat" %><br/>
+      <%= f.text_field :medicine_dose %>
+    </div>
+    <div data-role="fieldcontain">
+      <%= f.label :uom, "Unit Ukuran" %><br/>
+      <%= f.text_field :uom %>
+    </div>
+    <div data-role="fieldcontain">
+      <%= f.label :period, "Tempoh" %><br/>
+      <%= f.text_field :period %>
+    </div>
+    <div data-role="fieldcontain">
+      <%= f.label :name_of_doctor, "Nama Doktor" %><br/>
+      <%= f.text_field :name_of_doctor %>
+    </div>
+    <div data-role="fieldcontain">
+      <%= f.label :remarks, "Catatan" %><br/>
+      <%= f.text_area :remarks %>
+    </div>
+    <%= f.hidden_field :patient_id, :value => @patient.id %>
+  </div>
+
+</div>
+
+<br>
+  <%= f.submit 'Save' %>
+
+<% end %>
+
+<br/>
+  <br/>

@@ -1,3 +1,12 @@
+<div data-role="page" data-url="/patients/<%=@patient.id%>" data-context="a.refresh">
+
+  <%= render :partial => 'layouts/page_header', :locals => {:title => "#{@patient.name}", :location => "main" } %>
+
+  <div data-role="content">
+<% if @redirect %>
+  <a href="/patients" data-panel="menu" class="refresh" style="display: none"></a>
+<% end %>
+
 <% @location = "main" %>
 
 
@@ -108,3 +117,7 @@
   </div>
 </div>
 <br>
+  </div>
+<%=  render :partial=>'layouts/main_footer' %>
+
+</div>
