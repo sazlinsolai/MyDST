@@ -33,7 +33,9 @@
         return ele;
       }
 
-      $(document).unbind("click");
+
+      $(document).unbind(".linkhandler");
+
       $(document).bind( "click", function(event, isRefresh) {
         var link = findClosestLink(event.target);
         if (!link){
@@ -137,8 +139,9 @@
         //if link refers to an already active panel, stop default action and return
         if ($targetPanelActivePage.attr('data-url') == url || $currPanelActivePage.attr('data-url') == url) {
           if (isRefresh) { //then changePage below because it's a pageRefresh request
-            from=$(':jqmData(url="'+url+'")');
-            $.mobile.changePage([from,url], 'fade', undefined, false, undefined, $targetContainer, isRefresh );
+
+            $.mobile.changePage([$(':jqmData(url="'+url+'")'),url], 'fade', reverse, false, undefined, $targetContainer, isRefresh );
+
           }
           else { //else preventDefault and return
             event.preventDefault();
@@ -147,13 +150,17 @@
         }
         //if link refers to a page on another panel, changePage on that panel
         else if ($targetPanel && $targetPanel!=$link.parents('div[data-role="panel"]')) {
-          from=$targetPanelActivePage;
+
+          var from=$targetPanelActivePage;
+
           // $.mobile.pageContainer=$targetContainer;
           $.mobile.changePage([from,url], transition, reverse, true, undefined, $targetContainer);
         }
         //if link refers to a page inside the same panel, changePage on that panel 
         else {
-          from=$currPanelActivePage;
+
+          var from=$currPanelActivePage;
+
           // $.mobile.pageContainer=$currPanel;
           var hashChange= (hash == 'false' || hash == 'crumbs')? false : true;
           $.mobile.changePage([from,url], transition, reverse, hashChange, undefined, $currPanel);
