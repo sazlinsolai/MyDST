@@ -3,7 +3,7 @@
   <head>
     <title>myDSTmultiple</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
-    <%= stylesheet_link_tag "jquery.mobile-1.0a4.1","jquery.mobile.splitview","jquery.mobile.scrollview", "jquery.mobile.grids.collapsible","jquery.mobile.datebox"%>
+    <%= stylesheet_link_tag "jquery.mobile-1.0a4.1","jquery.mobile.splitview","jquery.mobile.scrollview", "jquery.mobile.grids.collapsible","jquery.mobile.datebox", "demo_page", "demo_table"%>
     <%= csrf_meta_tag %>
 	<%= yield :head %>
   </head>
@@ -13,7 +13,7 @@
       <%= yield %>
 
   </body>
-  <%= javascript_include_tag "jquery-1.5.2.min", "application", "jquery.mobile.splitview", "jquery.mobile-1.0a4.1", "jquery.easing.1.3", "jquery.mobile.scrollview","jquery.mobile.datebox" %>
+  <%= javascript_include_tag "jquery-1.5.2.min", "application", "jquery.mobile.splitview", "jquery.mobile-1.0a4.1", "jquery.easing.1.3", "jquery.mobile.scrollview","jquery.mobile.datebox", "jquery", "jquery.dataTables" %>
   <%= javascript_include_tag "highcharts" %>
   <%= javascript_include_tag "exporting" %>
   <%= yield :jscript %>

@@ -1,5 +1,6 @@
-<div data-role="page" data-url="/prescriptions/<%= @patient.id %>" data-context="a.refresh">
+<div data-role="page" data-url="/prescriptions/<%= @patient.id %>" data-context="a.refresh" data-id="page-customers">
   <% @location ="main" %>
+  
 
   <%= render :partial => 'layouts/page_header', :locals => {:title => "#{@patient.name}", :location => "main" } %>
 
@@ -18,7 +19,9 @@
         <p>No prescriptions available </p>
         <p> </p>
       <% else %>
-        <table border="1">
+        <div id="demo">
+        <table class="display" id="example">
+          <thead>
           <tr>
             <th>Tarikh Preskripsi</th>
             <th>Dos Ubat</th>
@@ -28,7 +31,9 @@
             <th>Status</th>
             <th>Tindakan</th>
           </tr>
+          </thead>
           <% @prescriptions.each do |pres| %>
+          <tbody>
             <tr>
               <td><%= pres.date_of_prescription%> </td>
               <td><%= pres.medicine_dose %> </td>
@@ -38,8 +43,10 @@
               <td>link to dispense here</td>
               <td></td>
             </tr>
+            </tbody>
           <% end %>
         </table>
+        </div>
       <% end %>
       <br/>
 
@@ -59,3 +66,12 @@
 
 
 
+<%#*<script type="text/javascript" charset="utf-8">%>
+  <%#*$(document).bind( "mobileinit", function(){%>
+
+<%#*$('div[data-id="page-customers"]').live('pageshow',function(){%>
+    <%#*alert('woiiii');%>
+    <%#*$('#example_<%= @patient.id%> ').dataTable();%>
+  <%#*});%>
+  <%#*});%>
+    <%#*</script>%>

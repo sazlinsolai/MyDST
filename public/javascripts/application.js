@@ -1,10 +1,27 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-$( window.document ).bind( "mobileinit", function(){
+$(document).bind( "mobileinit", function(){
     $.mobile.page.prototype.options.degradeInputs.date = 'text';
     $.mobile.selectmenu.prototype.options.nativeMenu = false;
 
 
+$(':jqmData(role="page")').live('pageshow',function(){
+
+    alert('woiiii');
+    $('#example').dataTable();
+ 
+  });
+//    $('div').live('pageshow',function(event, ui){
+//  alert('This page was just hidden: ');
+//  var table = $('#example').dataTable();
+//  alert('woooiiii');
+//  table.fnDestroy();
+//});
+//    $(':jqmData(id="main")').delegate(':jqmData(role="page")','pageshow', function(){
+//		alert('woi');
+//                $('#example').dataTable();
+//                alert('wei');
+//	});
     // patient listview update after submit new patient
 //	$(':jqmData(id="main")').delegate(':jqmData(role="page")','pagebeforeshow', function(){
 //		$('#new_patient').submit(function(event){
@@ -22,7 +39,6 @@ $( window.document ).bind( "mobileinit", function(){
         
 		
 });
-
 
 // show reload patient list in sidebar
 function load_patient() {

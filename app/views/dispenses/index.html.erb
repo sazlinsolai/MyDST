@@ -12,7 +12,7 @@
         <% @patients.group_by{|x| x.name.humanize[0]}.sort.each do |key,value| %>
             <li data-role="list-divider"><%= key %> </li>
             <% value.each do |i| %>
-            <li><%= link_to "#{i.name}", dispense_path("#{i.id}"), 'data-panel'=>"main"%> </li>
+            <li><%= link_to "#{i.name}", dispense_path("#{i.id}"), 'data-panel'=>"main" %> </li>
             <%end%>
         <% end %>
       
