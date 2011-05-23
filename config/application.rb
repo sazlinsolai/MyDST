@@ -38,5 +38,13 @@ module MyDST
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.to_prepare do
+          Devise::SessionsController.layout "pre_auth"
+          Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "preauth" : "application" }
+          Devise::ConfirmationsController.layout "pre_auth"
+          Devise::UnlocksController.layout "pre_auth"            
+          Devise::PasswordsController.layout "pre_auth"        
+    end
   end
 end

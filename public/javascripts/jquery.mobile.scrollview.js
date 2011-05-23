@@ -45,6 +45,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var $child = this._$clip.children();
 		if ($child.length > 1) {
 			$child = this._$clip.wrapInner("<div></div>").children();
+			$child.addClass("ui-scrollview-container");
 		}
 		this._$view = $child.addClass("ui-scrollview-view");
 

@@ -5193,7 +5193,7 @@ $.fn.grid = function(options){
 
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
 			if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
-				$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
+				$.mobile.changePage( $.mobile.firstPage, false, true, false, false );
 			}
 			// otherwise, trigger a hashchange to load a deeplink
 			else {

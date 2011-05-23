@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>myDST</title>
+    <title>Engineworks</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
     <%= stylesheet_link_tag "jquery.mobile-1.0a4.1","jquery.mobile.splitview","jquery.mobile.scrollview", "jquery.mobile.grids.collapsible","jquery.mobile.datebox", "demo_page", "demo_table" %>
     <%= csrf_meta_tag %>
-	<%= yield :head %>
+  	<%= yield :head %>
   </head>
 
   <body>
-    
-      <%= render :layout=>'layouts/page_layout', :locals=>{:title=>@page_title, :location => @location} do %>
-        <%= yield %>
+    <div data-role="panel" data-scroll="y" data-id="menu" data-hash="crumbs" data-context="a.default">
+      <%= render :partial => 'layouts/menu_panel'%>
+    </div><!-- end panel menu -->
+
+    <div data-role="panel" data-id="main">
+      <% if content_for?(:page)%>
+        <%= yield(:page) %>
+      <% else %>
+        <%= render :layout=>'layouts/page_layout', :locals=>{:title=>@page_title} do %>
+          <% yield %>
+        <% end %>
       <% end %>
-    
+    </div
   </body>
-  <%= javascript_include_tag "jquery-1.5.2.min", "application", "jquery.mobile.splitview", "jquery.mobile-1.0a4.1", "jquery.easing.1.3", "jquery.mobile.scrollview", "jquery-ui","jquery.mobile.datebox", "jquery", "jquery.dataTables" %>
- 
+  <%= javascript_include_tag "jquery-1.5.2.min", "application", "jquery.mobile.splitview", "jquery.mobile-1.0a4.1", "jquery.mobile.datebox", "jquery.easing.1.3", "jquery.mobile.scrollview", "jquery.dataTables" %>
+  <%= javascript_include_tag "highcharts", "exporting" %>
   <%= yield :jscript %>
-
- 
-
 </html>
 

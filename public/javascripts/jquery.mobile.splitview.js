@@ -11,8 +11,16 @@
         $('.ui-page').die('.toolbar');
         $('div[data-role="panel"]').addClass('ui-mobile-viewport');
         if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
-          var firstPage=$('div[data-id="main"] > div[data-role="page"]:first').page().addClass($.mobile.activePageClass); 
-          firstPage.children('div[data-role="content"]').attr('data-scroll', 'y');
+          // var firstPage=$('div[data-id="main"] > div[data-role="page"]:first').page().addClass($.mobile.activePageClass); 
+          // firstPage.children('div[data-role="content"]').attr('data-scroll', 'y');
+          //trial modifications to run changePage on both first pages - need this to allow all page events to trigger so we can 
+          //hook into them. otherwise, we have to create separate code just for the first page everytime. right now this code
+          //fails on the back button. it should not create the back button on first page load, but currently it does.
+          var firstPageMain=$('div:jqmData(id="main") > div:jqmData(role="page"):first'),
+              $container=$('div:jqmData(id="main")');
+          $.mobile.changePage(firstPageMain, 'none', true, false, false, $container );
+          // $.mobile.urlstack.pop();
+          $.mobile.activePage=undefined;
         }
         $(window).trigger('orientationchange');
       });
@@ -281,7 +289,7 @@
         }
 
         function replaceBackBtn(header) {
-          if($.mobile.urlstack.length > 0 && !header.children('a:jqmData(rel="back")').length && header.jqmData('backbtn')!=false){ 
+          if($.mobile.urlstack.length > 1 && !header.children('a:jqmData(rel="back")').length && header.jqmData('backbtn')!=false){ 
             header.prepend("<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>Back</a>" );
             header.children('a:jqmData(rel="back")').buttonMarkup();
           }
@@ -349,7 +357,7 @@
 
       //DONE: pageshow binding for scrollview
       $('div[data-role="page"]').live('pagebeforeshow.scroll', function(event){
-        if ($.support.touch) {
+        // if ($.support.touch) {
           var $page = $(this);
           $page.find('div[data-role="content"]').attr('data-scroll', 'y');
           $page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
@@ -377,7 +385,7 @@
               $this.scrollview(opts);
             }
           });
-        }
+        // }
       });
 
       //data-hash 'crumbs' handler
@@ -385,12 +393,27 @@
       $('div[data-role="page"]').live('pagebeforeshow.crumbs', function(event, data){
         var $this = $(this),
             backBtn = $this.find('a[data-rel="back"]');
-        if (backBtn.length && ($this.data('hash') == 'crumbs' || $this.parents('div[data-role="panel"]').data('hash') == 'crumbs') && $.mobile.urlstack.length > 0) {
-          backBtn.removeAttr('data-rel')
-                 .attr('href','#'+data.prevPage.attr('data-url'))
-                 .jqmData('direction','reverse')
-                 .addClass('ui-crumbs');
-          backBtn.find('.ui-btn-text').html(data.prevPage.find('div[data-role="header"] .ui-title').html());
+
+        function crumbify(backButton, href, text){
+          backButton.removeAttr('data-rel')
+                    .jqmData('direction','reverse')
+                    .addClass('ui-crumbs')
+                    .attr('href',href);
+          backBtn.find('.ui-btn-text').html(text);
+        }     
+        
+        if(backBtn.length && ($this.data('hash') == 'crumbs' || $this.parents('div[data-role="panel"]').data('hash') == 'crumbs')){
+          if(data.prevPage.jqmData('url') == $this.jqmData('url')){  //if it's a page refresh
+            var prevCrumb = data.prevPage.find('.ui-crumbs');
+            crumbify(backBtn, prevCrumb.attr('href'), prevCrumb.find('.ui-btn-text').html());
+          }
+          else if($.mobile.urlstack.length > 1) {
+            var text = data.prevPage.find('div:jqmData(role="header") .ui-title').html();
+            crumbify(backBtn, '#'+data.prevPage.jqmData('url'), text);
+          }
+          else if($.mobile.urlstack.length <= 1) {
+            backBtn.remove();
+          }
         }
       });
 
@@ -402,11 +425,11 @@
             pageContextSelector = $this.jqmData('context'),
             contextSelector= pageContextSelector ? pageContextSelector : panelContextSelector;
         //if you pass a hash into data-context, you need to specify panel, url and a boolean value for refresh
-        if $.type(contextSelector) === 'object' {
-          var $targetContainer=$(':jqmData(id="'+contextSelector.panel'")'),
-              $targetPanelActivePage==$targetContainer.children('div.'+$.mobile.activePageClass),
+        if($.type(contextSelector) === 'object') {
+          var $targetContainer=$('div:jqmData(id="'+contextSelector.panel+'")'),
+              $targetPanelActivePage=$targetContainer.children('div.'+$.mobile.activePageClass),
               isRefresh = contextSelector.refresh === undefined ? false : contextSelector.refresh;
-          $.mobile.changePage([$targetPanelActivePage, contextSelector.url],'fade', reverse, false, undefined, $targetContainer, isRefresh);
+          $.mobile.changePage([$targetPanelActivePage, contextSelector.url],'fade', false, false, undefined, $targetContainer, isRefresh);
         }
         else if(contextSelector && $this.find(contextSelector).length){
           $this.find(contextSelector).trigger('click');
