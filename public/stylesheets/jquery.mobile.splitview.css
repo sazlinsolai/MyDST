@@ -25,6 +25,10 @@ body {
   z-index: 100;
 }
 
+.ui-overflow-hidden {
+  overflow:hidden;
+}
+
 .splitview .ui-splitview-hidden {
   display:none;
 }
