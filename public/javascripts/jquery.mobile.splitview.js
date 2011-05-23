@@ -357,35 +357,8 @@
 
       //DONE: pageshow binding for scrollview
       $('div[data-role="page"]').live('pagebeforeshow.scroll', function(event){
-        // if ($.support.touch) {
           var $page = $(this);
-          $page.find('div[data-role="content"]').attr('data-scroll', 'y');
-          $page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
-            var $this = $(this);
-            // XXX: Remove this check for ui-scrolllistview once we've
-            //      integrated list divider support into the main scrollview class.
-            if ($this.hasClass("ui-scrolllistview"))
-              $this.scrolllistview();
-            else
-            {
-              var st = $this.data("scroll") + "";
-              var paging = st && st.search(/^[xy]p$/) != -1;
-              var dir = st && st.search(/^[xy]/) != -1 ? st.charAt(0) : null;
-
-              var opts = {};
-              if (dir)
-                opts.direction = dir;
-              if (paging)
-                opts.pagingEnabled = true;
-
-              var method = $this.data("scroll-method");
-              if (method)
-                opts.scrollMethod = method;
-
-              $this.scrollview(opts);
-            }
-          });
-        // }
+          $page.find(':jqmData(role="content")').touchScroll();
       });
 
       //data-hash 'crumbs' handler
