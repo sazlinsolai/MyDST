@@ -91,14 +91,12 @@
       <%= f.text_field :postcode %>
     </div>
     <div data-role="fieldcontain">
-      <%= f.label :district_id, "Bandar" %>
+      <%= f.label :daerah, "Bandar" %>
       <%= f.text_field :daerah  %>
     </div>
     <div data-role="fieldcontain">
-      
       <%= f.label :state_id, "Negeri" %>
       <%= f.select("state_id", options_for_select(Patient::NEGERI.collect {|x| [x[1],x[0]]}), {:prompt => 'Pilih Negeri'} )  %>
-    
     </div>
 
     
