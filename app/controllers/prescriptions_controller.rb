@@ -24,6 +24,7 @@ class PrescriptionsController < ApplicationController
 
     respond_with(@patients) do |format|
       if @prescription.save
+        @prescription.update_attribute(:name_of_doctor, params[:hari])
         format.html { redirect_to(prescription_path(@prescription.patient_id, :redirect => true))}
       else
         format.html { render :action => "new"}

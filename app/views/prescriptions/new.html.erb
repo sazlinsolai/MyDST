@@ -14,6 +14,14 @@
       <%= f.text_field :date_of_prescription, 'data-role'=>"datebox", 'data-options'=>'{"buttonTheme": "b", "dateFormat": "dd-mm-YYYY"}' %>
     </div>
     <div data-role="fieldcontain">
+      <%= f.label :prescription_due_date, "Tarikh Tamat Preskripsi" %><br />
+      <%= f.text_field :prescription_due_date, 'data-role'=>"datebox", 'data-options'=>'{"buttonTheme": "b", "dateFormat": "dd-mm-YYYY"}' %>
+    </div>
+    <div data-role="fieldcontain">
+      <%= f.label :dispense_type, "Cara Pendispensan" %><br/>
+      <%= f.select("dispense_type", options_for_select(['Live','Take Away']), {:prompt => 'Pilih Jenis Pendispensan'}) %>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :medicine_dose, "Dos Ubat" %><br/>
       <%= f.text_field :medicine_dose %>
     </div>
@@ -21,20 +29,33 @@
       <%= f.label :uom, "Unit Ukuran" %><br/>
       <%= f.text_field :uom %>
     </div>
-    <div data-role="fieldcontain">
-      <%= f.label :period, "Tempoh" %><br/>
-      <%= f.text_field :period %>
-    </div>
+    <%#*<div data-role="fieldcontain">%>
+      <%#= f.label :period, "Tempoh" %><br/>
+      <%#= f.text_field :period %>
+    <%#*</div>%>
     <div data-role="fieldcontain">
       <%= f.label :name_of_doctor, "Nama Doktor" %><br/>
       <%= f.text_field :name_of_doctor %>
     </div>
     <div data-role="fieldcontain">
       <%= f.label :remarks, "Catatan" %><br/>
-      <%= f.text_area :remarks %>
+      <%= f.check_box :remarks %>
     </div>
     <%= f.hidden_field :patient_id, :value => @patient.id %>
   </div>
+
+
+  <div class="span6 last">
+    
+    <div data-role="fieldcontain">
+      
+       
+      <%= label :hari, "#{Date.today.strftime('%d/%m/%Y %A')}", :class => "ui-input-text" %>
+      <%= check_box_tag :hari, :isnin %>
+      
+    </div>
+  </div>
+
 
 </div>
 
