@@ -25,7 +25,7 @@ body {
   z-index: 100;
 }
 
-.ui-overflow-hidden, html.touch div.ui-overflow-hidden {
+html.touch div.ui-overflow-hidden, div.ui-overflow-hidden {
   overflow:hidden;
 }
 
