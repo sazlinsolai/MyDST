@@ -25,7 +25,7 @@ body {
   z-index: 100;
 }
 
-.ui-overflow-hidden {
+.ui-overflow-hidden, html.touch div.ui-overflow-hidden {
   overflow:hidden;
 }
 
@@ -63,7 +63,10 @@ body {
   bottom:0;
   left:0;
   right:0;
-  overflow: auto;
+}
+
+.splitview .ui-content {
+  overflow:auto;
 }
 
 /************************************************************************************************************
