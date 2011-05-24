@@ -1,21 +1,6 @@
  <!-- start page id="pesakit" -->
-
-  <% @location = "menu" %>
-
- 
-  <%#= render :layout=>'layouts/page_layout', :locals=>{:title=>'Pesakit', :html_id=>'pesakit', :header=>'no'} do %>
     <% if user_signed_in? %>
-
-
-
-
-  
-      <a href="<%= new_patient_path %>" data-panel="main" data-role="button">New Patient</a>
-      
-
-      </br>
-
-
+      <a href="<%= new_patient_path %>" data-panel="main" data-role="button" style="margin-bottom:20px;">New Patient</a>
       <ul id="patient_list" data-role="listview" data-filter="true" data-theme="g">
         <% @patients.group_by{|x| x.name.humanize[0]}.sort.each do |key,value| %>
             <li data-role="list-divider"><%= key %> </li>
@@ -24,10 +9,5 @@
             <%end%>
         <% end %>
       </ul>
-      
-
-
-
     <% end %>
-  <%# end %>
   <!-- end page id="pesakit" -->

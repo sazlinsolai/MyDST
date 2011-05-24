@@ -358,7 +358,8 @@
       //DONE: pageshow binding for scrollview
       $('div[data-role="page"]').live('pagebeforeshow.scroll', function(event){
           var $page = $(this);
-          $page.find(':jqmData(role="content")').touchScroll();
+          $page.find(':jqmData(role="content")').addClass('ui-overflow-hidden').touchScroll();
+
       });
 
       //data-hash 'crumbs' handler
@@ -402,7 +403,9 @@
           var $targetContainer=$('div:jqmData(id="'+contextSelector.panel+'")'),
               $targetPanelActivePage=$targetContainer.children('div.'+$.mobile.activePageClass),
               isRefresh = contextSelector.refresh === undefined ? false : contextSelector.refresh;
-          $.mobile.changePage([$targetPanelActivePage, contextSelector.url],'fade', false, false, undefined, $targetContainer, isRefresh);
+          if(($targetPanelActivePage.jqmData('url') == contextSelector.url && contextSelector.refresh)||(!contextSelector.refresh && $targetPanelActivePage.jqmData('url') != contextSelector.url)){    
+            $.mobile.changePage([$targetPanelActivePage, contextSelector.url],'fade', false, false, undefined, $targetContainer, isRefresh);
+          }
         }
         else if(contextSelector && $this.find(contextSelector).length){
           $this.find(contextSelector).trigger('click');
