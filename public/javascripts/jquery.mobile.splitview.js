@@ -358,7 +358,7 @@
       //DONE: pageshow binding for scrollview
       $('div[data-role="page"]').live('pagebeforeshow.scroll', function(event){
           var $page = $(this);
-          $page.find(':jqmData(role="content")').addClass('ui-overflow-hidden').touchScroll();
+          $page.find(':jqmData(role="content")').touchScroll();
 
       });
 
