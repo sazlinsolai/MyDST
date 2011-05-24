@@ -1,0 +1,57 @@
+  <!-- start page id="main" -->
+  <div data-role="page" id="main">
+    <div data-role="header" data-backbtn="false">
+     <%= link_to "Logout", destroy_user_session_path, :class=>"ui-btn-right logout-btn", :rel => "external", :confirm => "Are you sure you want to logout?" %>
+     <h1>Menu</h1>
+    </div>
+
+    <div data-role="content">
+      <% if user_signed_in? %>
+        <ul data-role="listview" data-theme="g">
+          <li><%= link_to 'Pesakit', patients_path %> </li>
+          <li><%= link_to 'Kaunseling', work_in_progress_dispenses_path, 'data-panel'=>"main" %> </li>
+          <li><%= link_to 'Preskripsi', prescriptions_path %> </li>
+          <li><%= link_to 'Dispensan', dispenses_path %>
+            
+          </li>
+          <li><%= link_to 'Penyelaras Sistem', work_in_progress_dispenses_path, 'data-panel'=>"main" %>
+            <%#*<ul>%>
+              <%#*<li><a href="#negeri" class="default">Negeri</a></li>%>
+              <%#*<li><a href="#">Daerah</a></li>%>
+              <%#*<li><a href="#">Kategori Fasiliti</a></li>%>
+              <%#*<li><a href="#">Bangsa</a></li>%>
+              <%#*<li><a href="#">Kategori Pekerjaan</a></li>%>
+              <%#*<li><a href="#">Sebab Menagih</a></li>%>
+              <%#*<li><a href="#">Jenis Dadah</a></li>%>
+              <%#*<li><a href="#">Keputusan Ujian</a></li>%>
+              <%#*<li><a href="#">Kod Pembekal</a></li>%>
+              <%#*<li><a href="#">Kod Kaunselor</a></li>%>
+              <%#*<li><a href="#">Jenis Kaunseling</a></li>%>
+              <%#*<li><a href="#">Tajuk Kaunseling</a></li>%>
+              <%#*<li><a href="#">Pengguna</a></li>%>
+              <%#*<li><a href="#">Peranan Pengguna</a></li>%>
+            <%#*</ul>%>
+          </li>
+        </ul>
+      <% end %>
+    </div> 
+    <%=  render :partial=>'layouts/page_footer' %>
+  </div> <!-- end page id="main" -->
+
+  <!-- start page id="demo" -->
+  <div data-role="page" id="demo">
+    <div data-role="header" data-backbtn="false">
+     <%= link_to "Logout", destroy_user_session_path, :class=>"ui-btn-right logout-btn", :rel => "external", :confirm => "Are you sure you want to logout?" %>
+     <h1>Aktiviti</h1>
+    </div>
+    <div data-role="content">
+      <% if user_signed_in? %>
+        <ul data-role="listview" data-theme="g">
+          <li><%= link_to 'Semua', work_in_progress_dispenses_path, 'data-panel'=>"main" %></li>
+          <li><%= link_to 'Dispensi', work_in_progress_dispenses_path, 'data-panel'=>"main" %></li>
+          <li><%= link_to 'Kaunseling', work_in_progress_dispenses_path, 'data-panel'=>"main" %></li>
+        </ul>
+      <% end %>
+    </div> 
+    <%=  render :partial=>'layouts/page_footer' %>
+  </div><!-- end page id="demo" -->

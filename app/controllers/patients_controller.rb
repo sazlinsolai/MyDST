@@ -28,7 +28,7 @@ class PatientsController < ApplicationController
   def show
     @patient = Patient.find(params[:id])
     @redirect = params[:redirect] == "true"? true : false
-    render :layout => 'bare'
+    render :layout => 'hijax_page'
   end
 
   def edit

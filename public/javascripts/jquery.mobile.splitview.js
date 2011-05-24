@@ -11,8 +11,16 @@
         $('.ui-page').die('.toolbar');
         $('div[data-role="panel"]').addClass('ui-mobile-viewport');
         if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
-          var firstPage=$('div[data-id="main"] > div[data-role="page"]:first').page().addClass($.mobile.activePageClass); 
-          firstPage.children('div[data-role="content"]').attr('data-scroll', 'y');
+          // var firstPage=$('div[data-id="main"] > div[data-role="page"]:first').page().addClass($.mobile.activePageClass); 
+          // firstPage.children('div[data-role="content"]').attr('data-scroll', 'y');
+          //trial modifications to run changePage on both first pages - need this to allow all page events to trigger so we can 
+          //hook into them. otherwise, we have to create separate code just for the first page everytime. right now this code
+          //fails on the back button. it should not create the back button on first page load, but currently it does.
+          var firstPageMain=$('div:jqmData(id="main") > div:jqmData(role="page"):first'),
+              $container=$('div:jqmData(id="main")');
+          $.mobile.changePage(firstPageMain, 'none', true, false, false, $container );
+          // $.mobile.urlstack.pop();
+          $.mobile.activePage=undefined;
         }
         $(window).trigger('orientationchange');
       });
@@ -33,10 +41,8 @@
         return ele;
       }
 
-
       $(document).unbind(".linkhandler");
-
-      $(document).bind( "click", function(event, isRefresh) {
+      $(document).bind( "click", function(event) {
         var link = findClosestLink(event.target);
         if (!link){
           return;
@@ -81,6 +87,7 @@
           //if data-ajax attr is set to false, use the default behavior of a link
           hasAjaxDisabled = $link.is(":jqmData(ajax='false')"),
 
+          isRefresh=$link.jqmData('refresh'),
           $targetPanel=$link.jqmData('panel'),
           $targetContainer=$('div:jqmData(id="'+$targetPanel+'")'),
           $targetPanelActivePage=$targetContainer.children('div.'+$.mobile.activePageClass),
@@ -105,7 +112,9 @@
           return;
         }
 
-        $activeClickedLink = $link.closest( ".ui-btn" );
+        //still need this hack apparently:
+        $('.ui-btn.'+$.mobile.activeBtnClass).removeClass($.mobile.activeBtnClass);
+        $activeClickedLink = $link.closest( ".ui-btn" ).addClass($.mobile.activeBtnClass);
 
         if( isExternal || hasAjaxDisabled || hasTarget || !$.mobile.ajaxEnabled ||
           // TODO: deprecated - remove at 1.0
@@ -139,9 +148,7 @@
         //if link refers to an already active panel, stop default action and return
         if ($targetPanelActivePage.attr('data-url') == url || $currPanelActivePage.attr('data-url') == url) {
           if (isRefresh) { //then changePage below because it's a pageRefresh request
-
             $.mobile.changePage([$(':jqmData(url="'+url+'")'),url], 'fade', reverse, false, undefined, $targetContainer, isRefresh );
-
           }
           else { //else preventDefault and return
             event.preventDefault();
@@ -150,17 +157,13 @@
         }
         //if link refers to a page on another panel, changePage on that panel
         else if ($targetPanel && $targetPanel!=$link.parents('div[data-role="panel"]')) {
-
           var from=$targetPanelActivePage;
-
           // $.mobile.pageContainer=$targetContainer;
           $.mobile.changePage([from,url], transition, reverse, true, undefined, $targetContainer);
         }
         //if link refers to a page inside the same panel, changePage on that panel 
         else {
-
           var from=$currPanelActivePage;
-
           // $.mobile.pageContainer=$currPanel;
           var hashChange= (hash == 'false' || hash == 'crumbs')? false : true;
           $.mobile.changePage([from,url], transition, reverse, hashChange, undefined, $currPanel);
@@ -286,7 +289,7 @@
         }
 
         function replaceBackBtn(header) {
-          if($.mobile.urlstack.length > 0 && !header.children('a:jqmData(rel="back")').length && header.jqmData('backbtn')!=false){ 
+          if($.mobile.urlstack.length > 1 && !header.children('a:jqmData(rel="back")').length && header.jqmData('backbtn')!=false){ 
             header.prepend("<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>Back</a>" );
             header.children('a:jqmData(rel="back")').buttonMarkup();
           }
@@ -354,35 +357,9 @@
 
       //DONE: pageshow binding for scrollview
       $('div[data-role="page"]').live('pagebeforeshow.scroll', function(event){
-        if ($.support.touch) {
           var $page = $(this);
-          $page.find('div[data-role="content"]').attr('data-scroll', 'y');
-          $page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
-            var $this = $(this);
-            // XXX: Remove this check for ui-scrolllistview once we've
-            //      integrated list divider support into the main scrollview class.
-            if ($this.hasClass("ui-scrolllistview"))
-              $this.scrolllistview();
-            else
-            {
-              var st = $this.data("scroll") + "";
-              var paging = st && st.search(/^[xy]p$/) != -1;
-              var dir = st && st.search(/^[xy]/) != -1 ? st.charAt(0) : null;
+          $page.find(':jqmData(role="content")').addClass('ui-overflow-hidden').touchScroll();
 
-              var opts = {};
-              if (dir)
-                opts.direction = dir;
-              if (paging)
-                opts.pagingEnabled = true;
-
-              var method = $this.data("scroll-method");
-              if (method)
-                opts.scrollMethod = method;
-
-              $this.scrollview(opts);
-            }
-          });
-        }
       });
 
       //data-hash 'crumbs' handler
@@ -390,12 +367,27 @@
       $('div[data-role="page"]').live('pagebeforeshow.crumbs', function(event, data){
         var $this = $(this),
             backBtn = $this.find('a[data-rel="back"]');
-        if (backBtn.length && ($this.data('hash') == 'crumbs' || $this.parents('div[data-role="panel"]').data('hash') == 'crumbs') && $.mobile.urlstack.length > 0) {
-          backBtn.removeAttr('data-rel')
-                 .attr('href','#'+data.prevPage.attr('data-url'))
-                 .jqmData('direction','reverse')
-                 .addClass('ui-crumbs');
-          backBtn.find('.ui-btn-text').html(data.prevPage.find('div[data-role="header"] .ui-title').html());
+
+        function crumbify(backButton, href, text){
+          backButton.removeAttr('data-rel')
+                    .jqmData('direction','reverse')
+                    .addClass('ui-crumbs')
+                    .attr('href',href);
+          backBtn.find('.ui-btn-text').html(text);
+        }     
+        
+        if(backBtn.length && ($this.data('hash') == 'crumbs' || $this.parents('div[data-role="panel"]').data('hash') == 'crumbs')){
+          if(data.prevPage.jqmData('url') == $this.jqmData('url')){  //if it's a page refresh
+            var prevCrumb = data.prevPage.find('.ui-crumbs');
+            crumbify(backBtn, prevCrumb.attr('href'), prevCrumb.find('.ui-btn-text').html());
+          }
+          else if($.mobile.urlstack.length > 1) {
+            var text = data.prevPage.find('div:jqmData(role="header") .ui-title').html();
+            crumbify(backBtn, '#'+data.prevPage.jqmData('url'), text);
+          }
+          else if($.mobile.urlstack.length <= 1) {
+            backBtn.remove();
+          }
         }
       });
 
@@ -406,8 +398,17 @@
             panelContextSelector = $this.parents('div[data-role="panel"]').jqmData('context'),
             pageContextSelector = $this.jqmData('context'),
             contextSelector= pageContextSelector ? pageContextSelector : panelContextSelector;
-        if(contextSelector && $this.find(contextSelector).length){
-          $this.find(contextSelector).trigger('click', true);
+        //if you pass a hash into data-context, you need to specify panel, url and a boolean value for refresh
+        if($.type(contextSelector) === 'object') {
+          var $targetContainer=$('div:jqmData(id="'+contextSelector.panel+'")'),
+              $targetPanelActivePage=$targetContainer.children('div.'+$.mobile.activePageClass),
+              isRefresh = contextSelector.refresh === undefined ? false : contextSelector.refresh;
+          if(($targetPanelActivePage.jqmData('url') == contextSelector.url && contextSelector.refresh)||(!contextSelector.refresh && $targetPanelActivePage.jqmData('url') != contextSelector.url)){    
+            $.mobile.changePage([$targetPanelActivePage, contextSelector.url],'fade', false, false, undefined, $targetContainer, isRefresh);
+          }
+        }
+        else if(contextSelector && $this.find(contextSelector).length){
+          $this.find(contextSelector).trigger('click');
         }
       });
 

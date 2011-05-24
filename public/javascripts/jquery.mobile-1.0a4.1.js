@@ -2524,7 +2524,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 			//if to exists in DOM, save a reference to it in duplicateCachedPage for removal after page change
 			//unless method is post - which in REST case it has a url that is the same as a URL that lists all of a resource
 			//but upon creation of a new record, you want to point to that particular record after the fact. 
-			if( to.length && type != 'post'){
+			if( to.length ){
 				duplicateCachedPage = to;
 			}
 
@@ -2553,7 +2553,9 @@ $.widget( "mobile.page", $.mobile.widget, {
 					// correct url. loading into a temprorary element makes these requests immediately
 					if(pageElemRegex.test(html) && RegExp.$1 && dataUrlRegex.test(RegExp.$1) && RegExp.$1) {
 						redirectLoc = RegExp.$1;
-						
+						if(redirectLoc != url) {
+							duplicateCachedPage=null;
+						}
 					}
 
 					if( redirectLoc ){
@@ -5191,7 +5193,7 @@ $.fn.grid = function(options){
 
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
 			if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
-				$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
+				$.mobile.changePage( $.mobile.firstPage, false, true, false, false );
 			}
 			// otherwise, trigger a hashchange to load a deeplink
 			else {

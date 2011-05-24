@@ -36,7 +36,7 @@ role :db, domain, :primary => true
 #############################################################
 
 set :scm, :git
-set :branch, "master"
+set :branch, "datatables"
 set :scm_user, 'cs8'
 set :scm_passphrase, "Consoci802*"
 set :repository, "git@github.com:sazlinsolai/MyDST.git"

@@ -1,12 +1,11 @@
-<div data-role="page" data-url="/prescriptions/<%= @patient.id %>" data-context="a.refresh">
+<% content_for :page do %>
+<div data-role="page" data-url="/prescriptions/<%= @patient.id %>" data-context='{"url":"/prescriptions", "panel":"menu", "refresh":"true"}' data-id="page-customers">
   <% @location ="main" %>
+  
 
   <%= render :partial => 'layouts/page_header', :locals => {:title => "#{@patient.name}", :location => "main" } %>
 
   <div data-role="content">
-    <% if @redirect %>
-       <a href="/prescriptions" data-panel="menu" class="refresh" style="display: none"></a>
-    <% end %>
 
     <%= render :partial => "patients/patient_detail" %>
 
@@ -18,7 +17,9 @@
         <p>No prescriptions available </p>
         <p> </p>
       <% else %>
-        <table border="1">
+        <div id="demo">
+        <table class="display" id="example">
+          <thead>
           <tr>
             <th>Tarikh Preskripsi</th>
             <th>Dos Ubat</th>
@@ -28,7 +29,9 @@
             <th>Status</th>
             <th>Tindakan</th>
           </tr>
+          </thead>
           <% @prescriptions.each do |pres| %>
+          <tbody>
             <tr>
               <td><%= pres.date_of_prescription%> </td>
               <td><%= pres.medicine_dose %> </td>
@@ -38,8 +41,10 @@
               <td>link to dispense here</td>
               <td></td>
             </tr>
+            </tbody>
           <% end %>
         </table>
+        </div>
       <% end %>
       <br/>
 
@@ -56,6 +61,4 @@
   <%=  render :partial=>'layouts/main_footer' %>
 </div>
 
-
-
-
+<% end %>

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
+  layout Proc.new { |controller| controller.request.xhr? ? 'hijax_page' : 'application' }
+  
   helper :all
   helper_method :current_user_session, :current_user
   before_filter :authenticate_user!, :unless => :devise_controller?

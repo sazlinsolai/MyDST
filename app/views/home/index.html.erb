@@ -1,24 +1,15 @@
-
-
-
-  <%= render :partial => 'layouts/sidebar' %>
-
-
-    <div data-role="panel" data-id="main" data-context="a.default">
-
+<% content_for :page do %>
       <!-- start page id="home" in right column -->
-      <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'MyDST', :html_id=>'home', :location => "main"} do %>
+      <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'MyDST', :html_id=>'home'} do %>
       <% if user_signed_in? %>
           <div class="row">
             <div class="span6">
-
-        <!-- 3. Add the container -->
-		<div id="graph"></div>
-
+              <!-- 3. Add the container -->
+		          <div id="graph"></div>
             </div>
             <div class='span6 last'>
               <!-- 3. Add the container -->
-		<div id="pie"></div>
+          		<div id="pie"></div>
             </div>
           </div>
           <div class='row'>
@@ -30,7 +21,7 @@
 
 
       <!-- start page id="aktiviti" in right column -->
-      <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'MyDST', :html_id=>'aktiviti', :location => "main"} do %>
+      <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'MyDST', :html_id=>'aktiviti'} do %>
       
 
         <% if user_signed_in? %>
@@ -51,7 +42,7 @@
 
         
       <!-- start page id="ali" in right column -->
-      <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'MyDST', :html_id=>'ali', :location => "main"} do %>
+      <%= render :layout=>'layouts/page_layout', :locals=>{:title=>'MyDST', :html_id=>'ali'} do %>
 
       <% if user_signed_in? %>
           <div class="row">
@@ -135,10 +126,7 @@
         <% end %>
       <% end %>
       <!-- end page id="ali" in right column -->
-       
-
-
-    </div><!-- panel main -->
+<% end %>
 
 <%= content_for :jscript do %>
     <script type="text/javascript" charset="utf-8">
@@ -237,6 +225,7 @@ options.series.push({data: items})
    var chart = new Highcharts.Chart(options);
 
    var pie = new Highcharts.Chart(pie_chart_options);
+
 					
  });
 </script>

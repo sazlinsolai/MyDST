@@ -1,18 +1,20 @@
 <div data-role="page" 
-<%= (defined? html_id and !html_id.blank?) ? "id=#{html_id}" : ""  %>
-<%= (defined? html_class and !html_class.blank?) ? "id=#{html_class}" : ""  %>
+     <%= (defined? html_id and !html_id.blank?) ? "id=#{html_id}" : ""  %>
+     <%= (defined? html_class and !html_class.blank?) ? "id=#{html_class}" : ""  %>
      >
-
-  <%= render :partial=>'layouts/page_header', :locals => {:title => title, :location => location } %>
+  <% if content_for?(:header) %>
+    <%= yield :header %>
+  <% else %>
+    <%= render :partial=>'layouts/page_header', :locals => {:title => title} %>
+  <% end %>
 
   <div data-role="content" data-scroll="true">
-    <%= yield %>
+  	<%= yield %>
   </div>
-
-  <% if !location.blank? && location == 'menu' %>
-
-    <%=  render :partial=>'layouts/page_footer' %>
+  
+  <% if content_for?(:footer) %>
+  	<%= yield :footer %>
   <% else %>
-    <%=  render :partial=>'layouts/main_footer' %>
+  	<%=  render :partial=>'layouts/page_footer' %>
   <% end %>
 </div>
