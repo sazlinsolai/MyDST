@@ -516,10 +516,10 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		if (!this._didDrag && this.options.delayedClickEnabled && this._$clickEle.length) {
 			this._$clickEle
-				.trigger("mousedown")
-				//.trigger("focus")
-				.trigger("mouseup")
-				.trigger("click");
+				.trigger("vmousedown")
+				.trigger("focus")
+				.trigger("vmouseup")
+				.trigger("vclick");
 		}
 
 		// If a view scrolled, then we need to absorb
@@ -560,32 +560,32 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var self = this;
 		if (this.options.eventType === "mouse")
 		{
-			this._dragStartEvt = "mousedown";
+			this._dragStartEvt = "vmousedown";
 			this._dragStartCB = function(e){ return self._handleDragStart(e, e.clientX, e.clientY); };
 
-			this._dragMoveEvt = "mousemove";
+			this._dragMoveEvt = "vmousemove";
 			this._dragMoveCB = function(e){ return self._handleDragMove(e, e.clientX, e.clientY); };
 
-			this._dragStopEvt = "mouseup";
+			this._dragStopEvt = "vmouseup";
 			this._dragStopCB = function(e){ return self._handleDragStop(e); };
 		}
 		else // "touch"
 		{
-			this._dragStartEvt = "touchstart";
+			this._dragStartEvt = "vmousedown";
 			this._dragStartCB = function(e)
 			{
 				var t = e.originalEvent.targetTouches[0];
 				return self._handleDragStart(e, t.pageX, t.pageY);
 			};
 
-			this._dragMoveEvt = "touchmove";
+			this._dragMoveEvt = "vmousemove";
 			this._dragMoveCB = function(e)
 			{
 				var t = e.originalEvent.targetTouches[0];
 				return self._handleDragMove(e, t.pageX, t.pageY);
 			};
 
-			this._dragStopEvt = "touchend";
+			this._dragStopEvt = "vmouseup";
 			this._dragStopCB = function(e){ return self._handleDragStop(e); };
 		}
 
