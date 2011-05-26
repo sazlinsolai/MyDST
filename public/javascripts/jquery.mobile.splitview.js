@@ -357,7 +357,7 @@
 
       //DONE: pageshow binding for scrollview
       $('div[data-role="page"]').live('pagebeforeshow.scroll', function(event){
-        // if ($.support.touch) {
+        if ($.support.touch) {
           var $page = $(this);
           $page.find('div[data-role="content"]').attr('data-scroll', 'y');
           $page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
@@ -385,7 +385,7 @@
               $this.scrollview(opts);
             }
           });
-        // }
+        }
       });
 
       //data-hash 'crumbs' handler
@@ -437,6 +437,13 @@
           $this.find(contextSelector).trigger('click');
         }
       });
+
+      $('div:jqmData(role="page")').live('pageshow.contentHeight', function(){
+        var $this=$(this),
+            thisHeaderHeight=$this.children(':jqmData(role="header")').outerHeight(),
+            thisFooterHeight=$this.children(':jqmData(role="footer")').outerHeight();
+        $this.children(':jqmData(role="content")').css({'top':thisHeaderHeight, 'bottom':thisFooterHeight});
+      })
 
       //popover button click handler - from http://www.cagintranet.com/archive/create-an-ipad-like-dropdown-popover/
       $('.popover-btn').live('click', function(e){ 
