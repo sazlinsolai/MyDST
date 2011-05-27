@@ -11,17 +11,21 @@
 
   <hr></hr>
   <%= link_to 'New Prescription', new_prescription_path(:patient_id => @patient.id), 'data-role'=>"button"%>
+
+
+  
   <div class="row">
-    <div class="span10">
+    <div class="span12">
       <% if @prescriptions.empty? %>
         <p>No prescriptions available </p>
         <p> </p>
       <% else %>
         <div id="demo">
-        <table class="display" id="example">
+        <table class="display example">
           <thead>
           <tr>
             <th>Tarikh Preskripsi</th>
+            <th>Tarikh Tamat Preskripsi</th>
             <th>Dos Ubat</th>
             <th>Tempoh</th>
             <th>Nama Doktor</th>
@@ -30,19 +34,21 @@
             <th>Tindakan</th>
           </tr>
           </thead>
-          <% @prescriptions.each do |pres| %>
           <tbody>
+            <% @prescriptions.each do |pres| %>
             <tr>
               <td><%= pres.date_of_prescription%> </td>
+              <td><%= pres.prescription_due_date %> </td>
               <td><%= pres.medicine_dose %> </td>
-              <td><%= pres.period %> </td>
+              <td><%= (pres.prescription_due_date - pres.date_of_prescription).to_i %> hari </td>
               <td><%= pres.name_of_doctor %> </td>
               <td><%= pres.remarks %> </td>
-              <td>link to dispense here</td>
-              <td></td>
+              <td>status</td>
+              <td>action</td>
             </tr>
-            </tbody>
+            
           <% end %>
+            </tbody>
         </table>
         </div>
       <% end %>
@@ -62,3 +68,4 @@
 </div>
 
 <% end %>
+

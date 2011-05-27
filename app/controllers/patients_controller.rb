@@ -28,6 +28,8 @@ class PatientsController < ApplicationController
   def show
     @patient = Patient.find(params[:id])
     @redirect = params[:redirect] == "true"? true : false
+    @prescription = @patient.prescriptions.where("prescription_due_date >= '#{Time.zone.now.to_date}' ")
+    @dispense = Dispense.new
     render :layout => 'hijax_page'
   end
 

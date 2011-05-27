@@ -14,8 +14,8 @@
   </div>
   <div class="last">
     <div class='leftupperbutton' data-role="controlgroup" data-type="horizontal">
-        <a href="<%= new_patient_path %>" data-role="button" data-icon="plus" data-theme="c"><span style="color:green;">Pesakit Baru</span></a>
-        <a href="#" data-role="button" data-icon="check" data-theme="c"><span style="color:green;">Edit Rekod</span></a>
+        <!--<a href="<%= new_patient_path %>" data-role="button" data-icon="plus" data-theme="c"><span style="color:green;">Pesakit Baru</span></a> -->
+        <!--<a href="#" data-role="button" data-icon="check" data-theme="c"><span style="color:green;">Edit Rekod</span></a>-->
         <a href="#" data-role="button" data-icon="delete" data-theme="c"><span style="color:red;">Hapus Rekod</span></a>
         
         
@@ -86,7 +86,10 @@
 
 <div class="row">
   <div class="span6">
-    <h2>Alamat Pesakit</h2>
+    <h2>Alamat Pesakit </h2>
+  </div>
+  <div class="span6 last">
+    <h2>Pengdispensan </h2>
   </div>
   
 </div>
@@ -113,9 +116,54 @@
     </table>
    
   </div>
+
+  <div class="span6 last">
+
+    <% if @prescription.empty?  %> <!-- start check if no prescription for this patient -->
+    <p>tiada preskripsi.sila buat temujanji dengan doktor terlebih dahulu</p>
+    <% else %>
+      <table>
+      <tr>
+        <td align="right">Tarikh Tamat Preskripsi :</td>
+        <td><%= @prescription[0].prescription_due_date %> </td>
+      </tr>
+      <tr>
+        <td align="right">Tarikh Mula Preskripsi :</td>
+        <td><%= @prescription[0].date_of_prescription %></td>
+      </tr>
+      <tr>
+        <td align="right">Dos :</td>
+        <td><%= @prescription[0].medicine_dose %> <%= @prescription[0].uom %></td>
+      </tr>
+      <tr>
+        <td align="right">Jenis Pengdispensan :</td>
+        <td><%= @prescription[0].dispense_type %> </td>
+      </tr>
+      </table>
+
+    <% if @prescription[0].dispenses.have_dispense(@prescription[0].id).empty? %><!-- start check if patient already get dispense -->
+       <% if !@prescription[0].dispense_profiles.dispensing_day(@prescription[0].id).empty? %>
+        <!-- start dispense part -->
+            <%= form_for @dispense, :url => {:action => 'create', :controller => 'dispenses', :patient_id => @patient.id} do |f| %>
+              <%= f.hidden_field :prescription_id, :value => @prescription[0].id %>
+              <%= f.hidden_field :date_of_dispense, :value => Time.now.to_date %>
+              <%= f.hidden_field :no_of_dose, :value => @prescription[0].medicine_dose %>
+              <%= f.submit "Dispense" %>
+            <% end %>
+        <!-- end dispense part -->
+        <% end %>
+        <% end %><!-- end part check if patient get dispense -->
+    <% end %> <!-- end for checking prescription for this patient -->
+
+    
+
+    
+      
+    
+  </div>
 </div>
 <br>
-  </div>
+  </div> <!-- end data-content -->
 <%=  render :partial=>'layouts/main_footer' %>
 
 </div>

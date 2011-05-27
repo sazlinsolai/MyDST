@@ -14,6 +14,19 @@ class DispensesController < ApplicationController
     @prescription = params[:id]
   end
 
+  def create
+    @dispense = Dispense.new(params[:dispense])
+    @patient = params[:patient_id]
+    
+      if @dispense.save
+         redirect_to(patient_path(@patient))
+      else
+
+      end
+    
+
+  end
+
   def work_in_progress
     
   end
