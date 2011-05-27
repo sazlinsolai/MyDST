@@ -19,7 +19,7 @@
     </div>
     <div data-role="fieldcontain">
       <%= f.label :dispense_type, "Cara Pendispensan" %><br/>
-      <%= f.select("dispense_type", options_for_select(['DOT','Take Away']), {:prompt => 'Pilih Jenis Pendispensan'}) %>
+      <%= f.select("dispense_type", options_for_select(['DOT','Take Away']), {:include_blank => true}) %>
     </div>
     <div data-role="fieldcontain">
       <%= f.label :medicine_dose, "Dos Ubat" %><br/>
