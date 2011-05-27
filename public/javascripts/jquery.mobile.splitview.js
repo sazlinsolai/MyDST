@@ -357,9 +357,9 @@
 
       //DONE: pageshow binding for scrollview
       $('div[data-role="page"]').live('pagebeforeshow.scroll', function(event){
-        if ($.support.touch) {
+        // if ($.support.touch) {
           var $page = $(this);
-          $page.find('div[data-role="content"]').attr('data-scroll', 'y');
+          $page.find('div[data-role="content"]').attr('data-scroll','y');
           $page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
             var $this = $(this);
             // XXX: Remove this check for ui-scrolllistview once we've
@@ -385,7 +385,7 @@
               $this.scrollview(opts);
             }
           });
-        }
+        // }
       });
 
       //data-hash 'crumbs' handler

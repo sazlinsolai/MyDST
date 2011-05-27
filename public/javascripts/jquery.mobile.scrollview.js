@@ -255,7 +255,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	{
 		var svh = [];
 		this._$clip.parents(".ui-scrollview-clip").each(function(){
-			var d = $(this).data("scrollview");
+			var d = $(this).jqmData("scrollview");
 			if (d) svh.unshift(d);
 		});
 		return svh;
@@ -516,10 +516,10 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		if (!this._didDrag && this.options.delayedClickEnabled && this._$clickEle.length) {
 			this._$clickEle
-				.trigger("vmousedown")
+				.trigger("mousedown")
 				.trigger("focus")
-				.trigger("vmouseup")
-				.trigger("vclick");
+				.trigger("mouseup")
+				.trigger("click");
 		}
 
 		// If a view scrolled, then we need to absorb
@@ -560,32 +560,32 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var self = this;
 		if (this.options.eventType === "mouse")
 		{
-			this._dragStartEvt = "vmousedown";
+			this._dragStartEvt = "mousedown";
 			this._dragStartCB = function(e){ return self._handleDragStart(e, e.clientX, e.clientY); };
 
-			this._dragMoveEvt = "vmousemove";
+			this._dragMoveEvt = "mousemove";
 			this._dragMoveCB = function(e){ return self._handleDragMove(e, e.clientX, e.clientY); };
 
-			this._dragStopEvt = "vmouseup";
+			this._dragStopEvt = "mouseup";
 			this._dragStopCB = function(e){ return self._handleDragStop(e); };
 		}
 		else // "touch"
 		{
-			this._dragStartEvt = "vmousedown";
+			this._dragStartEvt = "touchstart";
 			this._dragStartCB = function(e)
 			{
 				var t = e.originalEvent.targetTouches[0];
 				return self._handleDragStart(e, t.pageX, t.pageY);
 			};
 
-			this._dragMoveEvt = "vmousemove";
+			this._dragMoveEvt = "touchmove";
 			this._dragMoveCB = function(e)
 			{
 				var t = e.originalEvent.targetTouches[0];
 				return self._handleDragMove(e, t.pageX, t.pageY);
 			};
 
-			this._dragStopEvt = "vmouseup";
+			this._dragStopEvt = "touchend";
 			this._dragStopCB = function(e){ return self._handleDragStop(e); };
 		}
 
@@ -742,7 +742,7 @@ jQuery.widget( "mobile.scrolllistview", jQuery.mobile.scrollview, {
 		// XXX: Note that we need to update this cache if we ever support lists
 		//      that can dynamically update their content.
 	
-		this._$dividers = this._$view.find("[data-role=list-divider]");
+		this._$dividers = this._$view.find(":jqmData(role='list-divider')");
 		this._lastDivider = null;
 	},
 
