@@ -1,0 +1,4 @@
+class DispenseProfilesController < ApplicationController
+
+  
+end

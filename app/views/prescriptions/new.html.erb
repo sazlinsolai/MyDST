@@ -14,6 +14,14 @@
       <%= f.text_field :date_of_prescription, 'data-role'=>"datebox", 'data-options'=>'{"buttonTheme": "b", "dateFormat": "dd-mm-YYYY"}' %>
     </div>
     <div data-role="fieldcontain">
+      <%= f.label :prescription_due_date, "Tarikh Tamat Preskripsi" %><br />
+      <%= f.text_field :prescription_due_date, 'data-role'=>"datebox", 'data-options'=>'{"buttonTheme": "b", "dateFormat": "dd-mm-YYYY"}' %>
+    </div>
+    <div data-role="fieldcontain">
+      <%= f.label :dispense_type, "Cara Pendispensan" %><br/>
+      <%= f.select("dispense_type", options_for_select(['DOT','Take Away']), {:include_blank => true}) %>
+    </div>
+    <div data-role="fieldcontain">
       <%= f.label :medicine_dose, "Dos Ubat" %><br/>
       <%= f.text_field :medicine_dose %>
     </div>
@@ -21,10 +29,10 @@
       <%= f.label :uom, "Unit Ukuran" %><br/>
       <%= f.text_field :uom %>
     </div>
-    <div data-role="fieldcontain">
-      <%= f.label :period, "Tempoh" %><br/>
-      <%= f.text_field :period %>
-    </div>
+    <%#*<div data-role="fieldcontain">%>
+      <%#= f.label :period, "Tempoh" %><br/>
+      <%#= f.text_field :period %>
+    <%#*</div>%>
     <div data-role="fieldcontain">
       <%= f.label :name_of_doctor, "Nama Doktor" %><br/>
       <%= f.text_field :name_of_doctor %>
@@ -35,6 +43,98 @@
     </div>
     <%= f.hidden_field :patient_id, :value => @patient.id %>
   </div>
+
+
+  <div class="span6 last">
+    <br>
+    <h2>Pilih hari pendispensan </h2>
+    
+
+      <%= f.fields_for :dispense_profiles, DispenseProfile.new do |dp| %>
+        <div data-role="fieldcontain">
+          <div class="ui-checkbox">
+            <label data-theme="c" class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-btn-up-c">
+              <span class="ui-btn-inner ui-btn-corner-all">
+                <span class="ui-btn-text">Isnin </span>
+                <span class="ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off"><%= check_box_tag("prescription[dispense_profiles_attributes][][day_name]", "monday") %></span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div data-role="fieldcontain">
+          <div class="ui-checkbox">
+            <label data-theme="c" class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-btn-up-c">
+              <span class="ui-btn-inner ui-btn-corner-all">
+                <span class="ui-btn-text">Selasa </span>
+                <span class="ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off"><%= check_box_tag("prescription[dispense_profiles_attributes][][day_name]", "tuesday") %></span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div data-role="fieldcontain">
+          <div class="ui-checkbox">
+            <label data-theme="c" class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-btn-up-c">
+              <span class="ui-btn-inner ui-btn-corner-all">
+                <span class="ui-btn-text">Rabu </span>
+                <span class="ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off"><%= check_box_tag("prescription[dispense_profiles_attributes][][day_name]", "wednesday") %></span>
+              </span>
+            </label>
+
+          </div>
+        </div>
+        <div data-role="fieldcontain">
+          <div class="ui-checkbox">
+            <label data-theme="c" class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-btn-up-c">
+              <span class="ui-btn-inner ui-btn-corner-all">
+                <span class="ui-btn-text">Khamis </span>
+                <span class="ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off"><%= check_box_tag("prescription[dispense_profiles_attributes][][day_name]", "thursday") %></span>
+              </span>
+            </label>
+
+          </div>
+        </div>
+        <div data-role="fieldcontain">
+          <div class="ui-checkbox">
+            <label data-theme="c" class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-btn-up-c">
+              <span class="ui-btn-inner ui-btn-corner-all">
+                <span class="ui-btn-text">Jumaat </span>
+                <span class="ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off"><%= check_box_tag("prescription[dispense_profiles_attributes][][day_name]", "friday") %></span>
+              </span>
+            </label>
+
+          </div>
+        </div>
+        <div data-role="fieldcontain">
+          <div class="ui-checkbox">
+            <label data-theme="c" class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-btn-up-c">
+              <span class="ui-btn-inner ui-btn-corner-all">
+                <span class="ui-btn-text">Sabtu </span>
+                <span class="ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off"><%= check_box_tag("prescription[dispense_profiles_attributes][][day_name]", "saturday") %></span>
+              </span>
+            </label>
+
+          </div>
+        </div>
+        <div data-role="fieldcontain">
+          <div class="ui-checkbox">
+            <label data-theme="c" class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-btn-up-c">
+              <span class="ui-btn-inner ui-btn-corner-all">
+                <span class="ui-btn-text">Ahad </span>
+                <span class="ui-icon ui-icon-ui-icon-checkbox-off ui-icon-checkbox-off"><%= check_box_tag("prescription[dispense_profiles_attributes][][day_name]", "sunday") %></span>
+              </span>
+            </label>
+
+          </div>
+        </div>
+      <% end %>
+    
+    
+    
+       
+      
+    
+  </div>
+
 
 </div>
 

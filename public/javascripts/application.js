@@ -14,7 +14,7 @@ $(document).bind( "mobileinit", function(){
     });
 
     $('div:jqmData(id="main")').delegate('div:jqmData(role="page")', 'pagebeforeshow', function(){
-       $(this).find('div[data-role="navbar"]:not(".page-specific")').addClass('ui-splitview-hidden'); 
+       $(this).find('div[data-role="navbar"]:not(".page-specific")').addClass('ui-splitview-hidden');
     });
 // patient listview update after submit new patient
 //	$(':jqmData(id="main")').delegate(':jqmData(role="page")','pagebeforeshow', function(){
@@ -22,7 +22,7 @@ $(document).bind( "mobileinit", function(){
 //		  load_patient();
 //	  });
 //	});
-		
+
 });
 
 // show updated patient list at prescription sidebar
