@@ -357,9 +357,35 @@
 
       //DONE: pageshow binding for scrollview
       $('div[data-role="page"]').live('pagebeforeshow.scroll', function(event){
+        if ($.support.touch) {
           var $page = $(this);
-          $page.find(':jqmData(role="content")').addClass('ui-overflow-hidden').touchScroll();
+          $page.find('div[data-role="content"]').attr('data-scroll', 'y');
+          $page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
+            var $this = $(this);
+            // XXX: Remove this check for ui-scrolllistview once we've
+            //      integrated list divider support into the main scrollview class.
+            if ($this.hasClass("ui-scrolllistview"))
+              $this.scrolllistview();
+            else
+            {
+              var st = $this.data("scroll") + "";
+              var paging = st && st.search(/^[xy]p$/) != -1;
+              var dir = st && st.search(/^[xy]/) != -1 ? st.charAt(0) : null;
 
+              var opts = {};
+              if (dir)
+                opts.direction = dir;
+              if (paging)
+                opts.pagingEnabled = true;
+
+              var method = $this.data("scroll-method");
+              if (method)
+                opts.scrollMethod = method;
+
+              $this.scrollview(opts);
+            }
+          });
+        }
       });
 
       //data-hash 'crumbs' handler
@@ -404,13 +430,20 @@
               $targetPanelActivePage=$targetContainer.children('div.'+$.mobile.activePageClass),
               isRefresh = contextSelector.refresh === undefined ? false : contextSelector.refresh;
           if(($targetPanelActivePage.jqmData('url') == contextSelector.url && contextSelector.refresh)||(!contextSelector.refresh && $targetPanelActivePage.jqmData('url') != contextSelector.url)){    
-            $.mobile.changePage([$targetPanelActivePage, contextSelector.url],'fade', false, false, undefined, $targetContainer, isRefresh);
+              $.mobile.changePage([$targetPanelActivePage, contextSelector.url],'fade', false, false, undefined, $targetContainer, isRefresh);
           }
         }
         else if(contextSelector && $this.find(contextSelector).length){
           $this.find(contextSelector).trigger('click');
         }
       });
+
+      $('div:jqmData(role="page")').live('pageshow.contentHeight', function(){
+        var $this=$(this),
+            thisHeaderHeight=$this.children(':jqmData(role="header")').outerHeight(),
+            thisFooterHeight=$this.children(':jqmData(role="footer")').outerHeight();
+        $this.children(':jqmData(role="content")').css({'top':thisHeaderHeight, 'bottom':thisFooterHeight});
+      })
 
       //popover button click handler - from http://www.cagintranet.com/archive/create-an-ipad-like-dropdown-popover/
       $('.popover-btn').live('click', function(e){ 

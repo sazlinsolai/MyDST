@@ -25,10 +25,6 @@ body {
   z-index: 100;
 }
 
-html.touch div.ui-overflow-hidden, div.ui-overflow-hidden {
-  overflow:hidden;
-}
-
 .splitview .ui-splitview-hidden {
   display:none;
 }
@@ -47,6 +43,7 @@ html.touch div.ui-overflow-hidden, div.ui-overflow-hidden {
   bottom:auto; 
   left:0;
   right:0;
+  z-index: 1000;
 }
 
 .splitview.min-width-480px .ui-footer {
@@ -55,18 +52,17 @@ html.touch div.ui-overflow-hidden, div.ui-overflow-hidden {
   bottom:0;
   left:0;
   right:0;
+  z-index:1000;
 }
 
 .splitview.min-width-480px .ui-content {
   position:absolute;
-  top:40px;   /*TODO: need to dynamically set this and bottom when we use dynamic toolbars later*/
+  top:0;
   bottom:0;
   left:0;
   right:0;
-}
-
-.splitview .ui-content {
   overflow:auto;
+  z-index:1;
 }
 
 /************************************************************************************************************
