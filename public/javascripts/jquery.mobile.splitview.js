@@ -360,6 +360,9 @@
         // if ($.support.touch) {
           var $page = $(this);
           $page.find('div[data-role="content"]').attr('data-scroll','y');
+          if(navigator.userAgent.match(/Android/i)){
+            $page.find('div:jqmData(role="content")').attr('data-scroll-method', 'position');
+          }
           $page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
             var $this = $(this);
             // XXX: Remove this check for ui-scrolllistview once we've
