@@ -357,12 +357,13 @@
 
       //DONE: pageshow binding for scrollview
       $('div[data-role="page"]').live('pagebeforeshow.scroll', function(event){
-        // if ($.support.touch) {
+         if ($.support.touch) { //uncomment this line bcoz cannot scroll problem
           var $page = $(this);
           $page.find('div[data-role="content"]').attr('data-scroll','y');
-          if(navigator.userAgent.match(/Android/i)){
-            $page.find('div:jqmData(role="content")').attr('data-scroll-method', 'position');
-          }
+          // comment out this part: line 364,365,366 bcoz it coz page cannot scroll
+//          if(navigator.userAgent.match(/Android/i)){
+//            $page.find('div:jqmData(role="content")').attr('data-scroll-method', 'position');
+//          }
           $page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
             var $this = $(this);
             // XXX: Remove this check for ui-scrolllistview once we've
@@ -388,7 +389,7 @@
               $this.scrollview(opts);
             }
           });
-        // }
+         }  //uncomment this line bcoz cannot scroll problem
       });
 
       //data-hash 'crumbs' handler
