@@ -4,6 +4,7 @@ MyDST::Application.routes.draw do
   resources :dispenses do
     collection do
       get 'work_in_progress'
+      get 'show_dispense'
     end
   end
   resources :prescriptions

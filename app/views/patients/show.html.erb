@@ -121,15 +121,17 @@
 
     <% if @prescription.empty?  %> <!-- start check if no prescription for this patient -->
     <p>tiada preskripsi.sila buat temujanji dengan doktor terlebih dahulu</p>
+    <% elsif @prescription[0].dispense_profiles.dispensing_day(@prescription[0].id).empty? %>
+    <p>tiada dispensan dijadualkan untuk hari ini</p>
     <% else %>
       <table>
       <tr>
         <td align="right">Tarikh Tamat Preskripsi :</td>
-        <td><%= @prescription[0].prescription_due_date %> </td>
+        <td><%= @prescription[0].prescription_due_date.strftime("%d/%m/%Y") %> </td>
       </tr>
       <tr>
         <td align="right">Tarikh Mula Preskripsi :</td>
-        <td><%= @prescription[0].date_of_prescription %></td>
+        <td><%= @prescription[0].date_of_prescription.strftime("%d/%m/%Y") %></td>
       </tr>
       <tr>
         <td align="right">Dos :</td>

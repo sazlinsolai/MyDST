@@ -79,39 +79,38 @@
 <div class="row">
   <div class="span12">
       <div id="demo">
-        <table class="display example">
+
+        <% if @patient.prescriptions.empty? %>
+            Tiada preskripsi wujud untuk pesakit ini.
+        <% else %>
+           <table class="display example">
                 <thead>
                   <tr>
-                    <th>Tarikh</th>
-                    <th>Nama Ubat</th>
+                    <th>Tarikh Mula Preskripsi</th>
+                    <th>Tarikh Tamat Preskripsi</th>
                     <th>Dos Ubat</th>
                     <th>Tempoh</th>
                     <th>Nama Dr.</th>
                     <th>Status</th>
-                    <th>Aksi</th>
+                    <th>Lihat Terperinci</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <% @patient.prescriptions.each do |pres| %>
                   <tr>
-                    <td>10/1/2011</td>
-                    <td>Ubat Batuk cap ibu dan anak</td>
-                    <td>5 mg</td>
-                    <td>1 Minggu</td>
-                    <td>Asyraf Rahman</td>
-                    <td>Selesai</td>
-                    <td>[]</td>
+                    <td><%= pres.date_of_prescription.strftime("%d/%m/%Y") %> </td>
+                    <td><%= pres.prescription_due_date.strftime("%d/%m/%Y") %> </td>
+                    <td><%= pres.medicine_dose%> <%= pres.uom %>  </td>
+                    <td><%= (pres.prescription_due_date - pres.date_of_prescription).to_i %> hari</td>
+                    <td><%= pres.name_of_doctor %> </td>
+                    <td>status</td>
+                    <td><%= link_to 'Dispensan Terperinci', show_dispense_dispenses_path(:id => pres.id), 'data-role'=>"button" %> </td>
                   </tr>
-                  <tr>
-                    <td>10/1/2011</td>
-                    <td>Ubat Batuk</td>
-                    <td>5 mg</td>
-                    <td>1 Minggu</td>
-                    <td>Asyraf Rahman</td>
-                    <td>Belum Selesai</td>
-                    <td><a href="<%= new_dispense_path(:id => 1) %>" data-role="button" data-icon="gear" data-theme="c" data-rel="dialog"><span style="color:green;">Pesakit Baru</span></a></td>
-                  </tr>
+                  <% end %>
                 </tbody>
               </table>
+        <% end %>
+        
       </div>
       
     <%#*</div>%>

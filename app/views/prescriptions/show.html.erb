@@ -37,8 +37,8 @@
           <tbody>
             <% @prescriptions.each do |pres| %>
             <tr>
-              <td><%= pres.date_of_prescription%> </td>
-              <td><%= pres.prescription_due_date %> </td>
+              <td><%= pres.date_of_prescription.strftime("%d/%m/%Y") %> </td>
+              <td><%= pres.prescription_due_date.strftime("%d/%m/%Y") %> </td>
               <td><%= pres.medicine_dose %> </td>
               <td><%= (pres.prescription_due_date - pres.date_of_prescription).to_i %> hari </td>
               <td><%= pres.name_of_doctor %> </td>

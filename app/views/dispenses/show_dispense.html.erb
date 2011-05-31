@@ -1,0 +1,58 @@
+<% content_for :page do %>
+<div data-role="page" >
+  <%# @location ="main" %>
+
+
+  <%= render :partial => 'layouts/page_header', :locals => {:title => "#{@patient.name}", :location => "main" } %>
+
+  <div data-role="content">
+
+    <%= render :partial => "patients/patient_detail" %>
+
+  <hr></hr>
+
+
+
+  <div class="row">
+    <div class="span12">
+        <div id="demo">
+        <table class="display example">
+          <thead>
+          <tr>
+            <th>Tarikh Dispensan</th>
+            <th>Jenis Dispensan</th>
+            <th>Dos Ubat</th>
+            
+          </tr>
+          </thead>
+          <tbody>
+            <% @prescription.dispenses.each do |dispense| %>
+            <tr>
+              <td><%= dispense.date_of_dispense.strftime("%d/%m/%Y") %> </td>
+              <td><%= @prescription.dispense_type %> </td>
+              <td><%= dispense.no_of_dose %> <%= @prescription.uom %>  </td>
+            </tr>
+
+          <% end %>
+            </tbody>
+        </table>
+        </div>
+      
+      <br/>
+
+
+    </div>
+
+  </div>
+
+  </div>
+
+
+
+
+  <%=  render :partial=>'layouts/main_footer' %>
+</div>
+
+<% end %>
+
+show_dispense

@@ -6,7 +6,12 @@ class DispensesController < ApplicationController
 
   def show
     @patient = Patient.find(params[:id])
-    
+  end
+
+  def show_dispense
+    @prescription = Prescription.find(params[:id])
+    @patient = Patient.find(@prescription.patient_id)
+    render :layout => 'hijax_page'
   end
 
   def new

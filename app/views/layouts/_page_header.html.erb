@@ -3,9 +3,9 @@
    
    <% if user_signed_in? %>
      <%= link_to "Logout", destroy_user_session_path, :class=>"ui-btn-right logout-btn", :rel => "external", :confirm => "Are you sure you want to logout?" %>
-     <h1><%= title.blank? ? "Enginery" : "#{title}" %></h1>
+     <h1><%= title.blank? ? "MyDST" : "#{title}" %></h1>
    <% else %>
-     <h1>Enginery</h1>
+     <h1>MyDST</h1>
    <% end %>
 
    <%= yield :after_header %>
