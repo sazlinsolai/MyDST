@@ -3,10 +3,13 @@
 	<body>
 	  <% if content_for?(:page)%>
       <%= yield(:page) %>
+          
     <% else %>
       <%= render :layout=>'layouts/page_layout', :locals=>{:title=>@page_title} do %>
         <% yield %>
       <% end %>
+          
     <% end %>
+          
 	</body>
 </html>

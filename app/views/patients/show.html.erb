@@ -1,5 +1,5 @@
 <% content_for :page do %>
-<div data-role="page" data-url="/patients/<%=@patient.id%>" data-context='{"url":"/patients", "panel":"menu", "refresh":"true"}'>
+<div data-role="page" data-url="/patients/<%=@patient.id%>" data-context='{"url":"/patients", "panel":"menu", "refresh":"true"}' >
 
   <%= render :partial => 'layouts/page_header', :locals => {:title => "#{@patient.name}", :location => "main" } %>
 
@@ -120,9 +120,11 @@
   <div class="span6 last">
 
     <% if @prescription.empty?  %> <!-- start check if no prescription for this patient -->
-    <p>tiada preskripsi.sila buat temujanji dengan doktor terlebih dahulu</p>
+      <p>tiada preskripsi.sila buat temujanji dengan doktor terlebih dahulu</p>
+      <%= link_to 'New Prescription', new_prescription_path(:patient_id => @patient.id), 'data-role'=>"button"%>
+
     <% elsif @prescription[0].dispense_profiles.dispensing_day(@prescription[0].id).empty? %>
-    <p>tiada dispensan dijadualkan untuk hari ini</p>
+      <p>tiada dispensan dijadualkan untuk hari ini</p>
     <% else %>
       <table>
       <tr>
@@ -153,6 +155,8 @@
               <%= f.submit "Dispense" %>
             <% end %>
         <!-- end dispense part -->
+
+        <%= link_to 'Additional Dose', new_prescription_path(:patient_id => @patient.id), 'data-role'=>"button"%>
         <% end %>
         <% end %><!-- end part check if patient get dispense -->
     <% end %> <!-- end for checking prescription for this patient -->
